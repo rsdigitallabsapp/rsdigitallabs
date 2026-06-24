@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Apps", href: "#apps" },
@@ -34,19 +35,16 @@ export function Navigation() {
       >
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-3 cursor-pointer group">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-              style={{
-                background: "linear-gradient(135deg, #7C3AED, #A855F7)",
-                boxShadow: "0 0 20px rgba(168,85,247,0.4)",
-              }}
-            >
-              <span className="text-white font-bold text-xs tracking-tighter">RS</span>
-            </div>
-            <span className="text-white font-semibold text-sm tracking-tight hidden sm:block">
-              RS Digital Labs
-            </span>
+          <a href="#hero" className="flex items-center cursor-pointer group">
+            <Image
+              src="/logo-transparent.png"
+              alt="RS Digital Labs"
+              width={130}
+              height={52}
+              className="transition-all duration-300 group-hover:opacity-80"
+              style={{ objectFit: "contain" }}
+              priority
+            />
           </a>
 
           {/* Links */}

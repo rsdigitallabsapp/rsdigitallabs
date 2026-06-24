@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const links = {
   Products: [
@@ -101,14 +102,15 @@ export function FooterSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
           {/* Logo column */}
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #7C3AED, #A855F7)" }}
-              >
-                <span className="text-white font-bold text-sm">RS</span>
-              </div>
-              <span className="font-bold text-white tracking-tight">RS Digital Labs</span>
+            <div className="mb-4">
+              <Image
+                src="/logo-transparent.png"
+                alt="RS Digital Labs"
+                width={150}
+                height={60}
+                className="opacity-90 hover:opacity-100 transition-opacity duration-200"
+                style={{ objectFit: "contain" }}
+              />
             </div>
             <p className="text-slate-600 text-sm leading-relaxed mb-6">
               Building apps that make life easier, one product at a time.
