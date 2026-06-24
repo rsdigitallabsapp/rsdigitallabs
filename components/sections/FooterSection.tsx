@@ -14,8 +14,10 @@ const links = {
     { label: "Contact", href: "mailto:chiqui.santiago@gmail.com" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Plannie Privacy", href: "/plannie/privacy-policy" },
+    { label: "CHIQ Privacy", href: "/chiq/privacy-policy" },
   ],
 };
 
