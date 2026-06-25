@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 
 const apps = [
   {
@@ -32,6 +33,7 @@ const apps = [
     glowColor: "rgba(34,211,238,0.3)",
     accentBg: "rgba(34,211,238,0.08)",
     status: "Live",
+    href: "/plannie",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
         <rect x="8" y="8" width="24" height="24" rx="4" stroke="#22D3EE" strokeWidth="1.5" />
@@ -96,7 +98,7 @@ function AppCard({
     setTilt({ x: y * -18, y: x * 18 });
   };
 
-  return (
+  const card = (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
@@ -190,6 +192,11 @@ function AppCard({
       </div>
     </motion.div>
   );
+
+  if (app.href) {
+    return <Link href={app.href} className="block">{card}</Link>;
+  }
+  return card;
 }
 
 export function AppsSection() {

@@ -5,7 +5,7 @@ import Image from "next/image";
 const links = {
   Products: [
     { label: "CHIQ", href: "#apps" },
-    { label: "Plannie", href: "#apps" },
+    { label: "Plannie", href: "/plannie" },
     { label: "OLIVIA", href: "#apps" },
     { label: "Coming Soon", href: "#apps" },
   ],
@@ -17,7 +17,9 @@ const links = {
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
-    { label: "Plannie Privacy", href: "/plannie/privacy-policy" },
+    { label: "Plannie Privacy", href: "/plannie/privacy" },
+    { label: "Plannie Terms", href: "/plannie/terms" },
+    { label: "Delete Account", href: "/plannie/delete-account" },
     { label: "CHIQ Privacy", href: "/chiq/privacy-policy" },
   ],
 };
