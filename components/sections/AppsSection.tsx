@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const apps = [
   {
@@ -89,6 +89,7 @@ function AppCard({
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
@@ -98,7 +99,7 @@ function AppCard({
     setTilt({ x: y * -18, y: x * 18 });
   };
 
-  const card = (
+  return (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
@@ -111,6 +112,7 @@ function AppCard({
         setHovered(false);
         setTilt({ x: 0, y: 0 });
       }}
+      onClick={() => app.href && router.push(app.href)}
       style={{
         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${hovered ? "10px" : "0px"})`,
         transition: hovered ? "transform 0.1s linear, box-shadow 0.3s" : "transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s",
@@ -192,11 +194,6 @@ function AppCard({
       </div>
     </motion.div>
   );
-
-  if (app.href) {
-    return <Link href={app.href} className="block">{card}</Link>;
-  }
-  return card;
 }
 
 export function AppsSection() {

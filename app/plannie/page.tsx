@@ -428,7 +428,7 @@ function HowItWorks() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-white leading-tight"
           >
-            Four steps to a{" "}
+            Four steps to finding{" "}
             <span
               style={{
                 background: `linear-gradient(135deg, ${CYAN}, ${ROSE})`,
@@ -437,7 +437,7 @@ function HowItWorks() {
                 backgroundClip: "text",
               }}
             >
-              perfect date.
+              something fun to do.
             </span>
           </motion.h2>
         </div>
@@ -729,6 +729,10 @@ const faqs = [
   {
     q: "Why do I sometimes see results outside my city?",
     a: "When limited options exist within a selected area, Plannie may include nearby areas to provide better recommendations. This ensures you always have great options to choose from, even in smaller areas.",
+  },
+  {
+    q: "Why do I sometimes see recommendations outside my selected area?",
+    a: "Plannie searches within your selected area first. When limited options are available, nearby areas may be included to provide better recommendations.",
   },
   {
     q: "Can I save plans?",

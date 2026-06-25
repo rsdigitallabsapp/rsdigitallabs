@@ -158,9 +158,12 @@ export function FooterSection() {
           <p className="text-slate-700 text-sm font-mono">
             © {new Date().getFullYear()} RS Digital Labs. All rights reserved.
           </p>
-          <p className="text-slate-700 text-xs font-mono">
-            Built with precision. Shipped with purpose.
-          </p>
+          <a
+            href="mailto:support@rsdigitallabs.com"
+            className="text-slate-700 text-xs font-mono hover:text-slate-400 transition-colors duration-200"
+          >
+            support@rsdigitallabs.com
+          </a>
         </div>
       </div>
     </footer>
