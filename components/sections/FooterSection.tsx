@@ -12,7 +12,7 @@ const links = {
   Company: [
     { label: "About", href: "#about" },
     { label: "Roadmap", href: "#timeline" },
-    { label: "Contact", href: "mailto:chiqui.santiago@gmail.com" },
+    { label: "Contact", href: "mailto:support@rsdigitallabs.com" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
@@ -89,7 +89,7 @@ export function FooterSection() {
             gap, we want to hear about it.
           </p>
           <a
-            href="mailto:chiqui.santiago@gmail.com"
+            href="mailto:support@rsdigitallabs.com"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 cursor-pointer"
             style={{
               background: "linear-gradient(135deg, #7C3AED, #A855F7)",

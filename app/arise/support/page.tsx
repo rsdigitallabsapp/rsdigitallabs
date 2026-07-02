@@ -8,7 +8,7 @@ import { Navigation } from "@/components/Navigation";
 import { FooterSection } from "@/components/sections/FooterSection";
 
 const SAGE = "#8AAF8E";
-const SUPPORT_EMAIL = "hello@rsdigitallabs.com";
+const SUPPORT_EMAIL = "support@rsdigitallabs.com";
 
 type FaqItem = { q: string; a: React.ReactNode; keywords: string };
 type FaqSection = { title: string; items: FaqItem[] };

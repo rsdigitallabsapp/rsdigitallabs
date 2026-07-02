@@ -12,7 +12,7 @@ const EFFECTIVE_DATE = "June 23, 2026";
 const COMPANY = "RS Digital Labs";
 const WEBSITE = "https://rsdigitallabs.com";
 const SUPPORT = "support@rsdigitallabs.com";
-const CONTACT = "contact@rsdigitallabs.com";
+const CONTACT = "support@rsdigitallabs.com";
 
 export default function PrivacyPolicyPage() {
   return (

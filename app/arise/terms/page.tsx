@@ -12,7 +12,7 @@ const EFFECTIVE_DATE = "June 2026";
 const APP = "ARISE";
 const COMPANY = "RS Digital Labs";
 const WEBSITE = "https://rsdigitallabs.com";
-const LEGAL_EMAIL = "legal@rsdigitallabs.com";
+const LEGAL_EMAIL = "support@rsdigitallabs.com";
 const SAGE = "#8AAF8E";
 
 export default function AriseTermsPage() {
