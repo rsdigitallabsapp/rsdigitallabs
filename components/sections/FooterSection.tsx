@@ -4,10 +4,10 @@ import Image from "next/image";
 
 const links = {
   Products: [
+    { label: "ARISE", href: "/arise" },
     { label: "CHIQ", href: "#apps" },
     { label: "Plannie", href: "/plannie" },
     { label: "OLIVIA", href: "#apps" },
-    { label: "Coming Soon", href: "#apps" },
   ],
   Company: [
     { label: "About", href: "#about" },
@@ -17,6 +17,9 @@ const links = {
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "ARISE Privacy", href: "/arise/privacy" },
+    { label: "ARISE Terms", href: "/arise/terms" },
+    { label: "ARISE Support", href: "/arise/support" },
     { label: "Plannie Privacy", href: "/plannie/privacy" },
     { label: "Plannie Terms", href: "/plannie/terms" },
     { label: "Delete Account", href: "/plannie/delete-account" },

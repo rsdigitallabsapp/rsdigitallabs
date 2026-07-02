@@ -5,6 +5,25 @@ import { useRouter } from "next/navigation";
 
 const apps = [
   {
+    id: "arise",
+    name: "ARISE",
+    tagline: "Before the world speaks to you, speak to yourself.",
+    description:
+      "Your morning affirmation ritual. One statement, spoken aloud, three times, in under ten seconds.",
+    color: "#8AAF8E",
+    glowColor: "rgba(138,175,142,0.3)",
+    accentBg: "rgba(138,175,142,0.08)",
+    status: "Live",
+    href: "/arise",
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
+        <circle cx="20" cy="20" r="10" stroke="#8AAF8E" strokeWidth="1.5" />
+        <path d="M20 14v6l4 3" stroke="#8AAF8E" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 8l1.5 1.5M28 8l-1.5 1.5M12 32l1.5-1.5M28 32l-1.5-1.5" stroke="#8AAF8E" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+      </svg>
+    ),
+  },
+  {
     id: "chiq",
     name: "CHIQ",
     tagline: "AI-powered conversations, elevated.",
