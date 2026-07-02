@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — ARISE by RS Digital Labs</title>
+<meta name="description" content="Get help with ARISE. Common questions, subscription help, and how to contact us.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#13110D;--surface:#1D1A14;--elevated:#25211A;--border:#332D24;
+  --sage:#8AAF8E;--sage-dim:#3D5E41;--cream:#EDE6D6;--cream-dim:#9B9080;--cream-muted:#5A5248;
+  --white:#fff;--off:#F8F8F6;--off2:#F2F0ED;--black:#0D0D0D;--grey:#4A4A4A;--border-lt:#E8E6E2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--grey);-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:64px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-lt)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-brand img{width:28px;height:28px;border-radius:7px}
+.nav-brand-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--black)}
+.nav-back{font-size:13px;color:var(--grey);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--black)}
+.hero-support{background:var(--bg);padding:100px 40px 64px;text-align:center}
+.legal-eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:16px}
+h1.support-h1{font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,58px);font-weight:800;letter-spacing:-.04em;color:var(--cream);line-height:1.1;margin-bottom:16px}
+.support-sub{font-size:17px;color:var(--cream-dim);font-weight:300;max-width:440px;margin:0 auto 32px;line-height:1.65}
+
+/* Search bar */
+.search-wrap{max-width:480px;margin:0 auto;position:relative}
+.search-input{width:100%;padding:16px 20px 16px 48px;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.search-input::placeholder{color:var(--cream-muted)}
+.search-input:focus{border-color:var(--sage)}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--cream-muted)}
+.search-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* Main layout */
+.support-body{max-width:960px;margin:0 auto;padding:64px 40px 100px}
+
+/* Contact cards */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:64px}
+.contact-card{padding:28px;border-radius:20px;border:1px solid var(--border-lt);background:var(--off);text-align:center}
+.contact-card-icon{width:48px;height:48px;border-radius:14px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+.contact-card h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px}
+.contact-card p{font-size:13px;color:var(--grey);line-height:1.55;margin-bottom:16px;font-weight:300}
+.contact-card a{font-size:13px;font-weight:500;color:var(--black);text-decoration:none;display:inline-block;padding:8px 18px;border-radius:100px;border:1px solid var(--border-lt);background:var(--white);transition:all .2s}
+.contact-card a:hover{border-color:var(--black);background:var(--off2)}
+
+/* FAQ sections */
+.faq-section{margin-bottom:48px}
+.faq-section-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--black);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-lt);letter-spacing:-.02em}
+.faq-list{display:flex;flex-direction:column;gap:1px;border-radius:14px;overflow:hidden;border:1px solid var(--border-lt)}
+.faq-item{background:var(--white)}
+.faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--black);border-bottom:1px solid var(--border-lt);transition:background .2s}
+.faq-btn:hover{background:var(--off)}
+.faq-icon{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;font-size:13px;color:var(--grey)}
+.faq-item.open .faq-icon{background:var(--black);border-color:var(--black);color:white;transform:rotate(45deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;font-size:14px;color:var(--grey);line-height:1.7;font-weight:300;border-bottom:1px solid var(--border-lt)}
+.faq-body.open{max-height:300px;padding:16px 22px}
+.faq-body a{color:var(--black);font-weight:500}
+.faq-item:last-child .faq-btn{border-bottom:none}
+.faq-item:last-child .faq-body{border-bottom:none}
+
+/* Steps */
+.steps-list{display:flex;flex-direction:column;gap:16px;padding:16px 22px}
+.step-item{display:flex;align-items:flex-start;gap:14px}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--black);color:white;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:14px;color:var(--grey);line-height:1.65;font-weight:300}
+
+/* Contact section bottom */
+.contact-bottom{background:var(--bg);border-radius:24px;padding:52px 48px;text-align:center;margin-top:64px}
+.contact-bottom h2{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.03em;color:var(--cream);margin-bottom:12px}
+.contact-bottom p{font-size:16px;color:var(--cream-dim);margin-bottom:28px;font-weight:300;line-height:1.65}
+.contact-btn{display:inline-flex;align-items:center;gap:8px;background:var(--sage);color:var(--bg);font-size:14px;font-weight:500;padding:14px 28px;border-radius:100px;text-decoration:none;transition:all .25s}
+.contact-btn:hover{background:#AECAAE;transform:translateY(-1px);box-shadow:0 8px 24px rgba(138,175,142,.25)}
+.response-time{font-size:13px;color:var(--cream-muted);margin-top:14px}
+
+@media(max-width:700px){
+  .contact-grid{grid-template-columns:1fr}
+  .support-body{padding:48px 24px 72px}
+  .contact-bottom{padding:36px 24px}
+  nav{padding:0 24px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="../assets/arise/logo.png" alt="ARISE">
+    <span class="nav-brand-name">ARISE</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to ARISE</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero-support">
+  <div class="legal-eyebrow">Support</div>
+  <h1 class="support-h1">How can we help?</h1>
+  <p class="support-sub">Find answers below or reach out directly. We read every message and respond within one business day.</p>
+  <div class="search-wrap">
+    <div class="search-icon"><svg viewBox="0 0 18 18"><circle cx="7.5" cy="7.5" r="5"/><line x1="11.5" y1="11.5" x2="16" y2="16"/></svg></div>
+    <input type="text" class="search-input" placeholder="Search for an answer..." id="searchInput" oninput="filterFaqs(this.value)">
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="support-body">
+
+  <!-- Contact channels -->
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-card-icon" style="background:#F0FFF0">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#4A7D4E" stroke-width="1.5"><path d="M3 5h16v12H3z"/><path d="M3 5l8 7 8-7"/></svg>
+      </div>
+      <h3>Email us</h3>
+      <p>For general questions, feedback, and anything else. We'll get back to you within one business day.</p>
+      <a href="mailto:hello@rsdigitallabs.com">hello@rsdigitallabs.com</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon" style="background:#FFF8F0">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#9C6A3E" stroke-width="1.5"><rect x="3" y="3" width="16" height="16" rx="4"/><path d="M8 11h6M11 8v6"/></svg>
+      </div>
+      <h3>Subscription help</h3>
+      <p>For refunds and subscription cancellations, contact Apple or Google directly — they process all payments.</p>
+      <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">Apple: reportaproblem.apple.com</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon" style="background:#F5F0FF">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#7C3AED" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M11 7v4l3 3"/></svg>
+      </div>
+      <h3>Response time</h3>
+      <p>We aim to respond to all support requests within one business day (Monday–Friday, Manila time).</p>
+      <a href="mailto:hello@rsdigitallabs.com">Send a message</a>
+    </div>
+  </div>
+
+  <!-- FAQ: Getting Started -->
+  <div class="faq-section" id="getting-started">
+    <div class="faq-section-title">Getting started</div>
+    <div class="faq-list">
+      <div class="faq-item" data-text="getting started setup first time">
+        <button class="faq-btn" onclick="toggleFaq(this)">How do I set up ARISE for the first time? <span class="faq-icon">+</span></button>
+        <div class="faq-body">
+          <div class="steps-list">
+            <div class="step-item"><div class="step-num">1</div><div class="step-text">Open ARISE. You'll be guided through a short setup: choose the affirmation categories that speak to you.</div></div>
+            <div class="step-item"><div class="step-num">2</div><div class="step-text">Grant microphone and notification permissions when prompted. Both can be revoked later in Settings.</div></div>
+            <div class="step-item"><div class="step-num">3</div><div class="step-text">That's it. Tomorrow morning, ARISE will be waiting for you when you unlock your phone.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-text="categories change affirmations choose">
+        <button class="faq-btn" onclick="toggleFaq(this)">How do I change my affirmation categories? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Open the app, go to Settings, then tap "Edit Categories." Select any combination of categories. Your affirmations will update starting the next day.</div>
+      </div>
+      <div class="faq-item" data-text="microphone permission speech recognition">
+        <button class="faq-btn" onclick="toggleFaq(this)">Why does ARISE need microphone access? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">ARISE listens for you to say your affirmation aloud — that's the practice. Speech recognition confirms you've said it three times. Your voice is never recorded or sent anywhere; recognition happens entirely on your device. You can deny the permission and tap manually instead.</div>
+      </div>
+      <div class="faq-item" data-text="notifications morning reminder">
+        <button class="faq-btn" onclick="toggleFaq(this)">How do notifications work? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">ARISE sends a local morning reminder at the time you specify during setup. This notification is scheduled on your device — we don't operate a notification server, and your notification time is never sent to us. You can change your reminder time in Settings, or turn notifications off entirely in your phone's Settings app.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ: Subscription -->
+  <div class="faq-section" id="subscription">
+    <div class="faq-section-title">Premium & Subscriptions</div>
+    <div class="faq-list">
+      <div class="faq-item" data-text="premium subscribe upgrade plans price cost">
+        <button class="faq-btn" onclick="toggleFaq(this)">What's included in ARISE Premium? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Premium includes: unlimited custom affirmations in your own words, access to all affirmation categories, Streak Shield (protect your streak on missed days), and all future premium features at no additional charge.</div>
+      </div>
+      <div class="faq-item" data-text="cancel subscription cancel premium stop billing">
+        <button class="faq-btn" onclick="toggleFaq(this)">How do I cancel my subscription? <span class="faq-icon">+</span></button>
+        <div class="faq-body">
+          <div class="steps-list">
+            <div class="step-item"><div class="step-num">iOS</div><div class="step-text">Open Settings → tap your name → Subscriptions → ARISE → Cancel Subscription. Or visit <a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">apps.apple.com/account/subscriptions</a>.</div></div>
+            <div class="step-item"><div class="step-num">And</div><div class="step-text">Open Google Play → tap your profile → Payments &amp; subscriptions → Subscriptions → ARISE → Cancel.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-text="refund money back purchase billing">
+        <button class="faq-btn" onclick="toggleFaq(this)">Can I get a refund? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">All purchases are handled by Apple or Google. For iOS refunds, visit <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>. For Android refunds, visit your Google Play order history. We cannot process refunds directly, but we're happy to help you navigate the process — email us at <a href="mailto:hello@rsdigitallabs.com">hello@rsdigitallabs.com</a>.</div>
+      </div>
+      <div class="faq-item" data-text="restore purchase new phone reinstall">
+        <button class="faq-btn" onclick="toggleFaq(this)">I switched phones. How do I restore my purchase? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Install ARISE on your new phone and sign in with the same Apple ID or Google account you used to subscribe. Open the app, go to Settings → Premium → Restore Purchases. Your subscription will be re-activated automatically.</div>
+      </div>
+      <div class="faq-item" data-text="family sharing share subscription">
+        <button class="faq-btn" onclick="toggleFaq(this)">Can I share my subscription with family? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">ARISE Premium is currently a personal subscription and does not support Family Sharing. Each person who wants Premium features will need their own subscription.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ: Troubleshooting -->
+  <div class="faq-section" id="troubleshooting">
+    <div class="faq-section-title">Troubleshooting</div>
+    <div class="faq-list">
+      <div class="faq-item" data-text="app not working crash bug broken">
+        <button class="faq-btn" onclick="toggleFaq(this)">The app isn't working properly. What should I try? <span class="faq-icon">+</span></button>
+        <div class="faq-body">
+          <div class="steps-list">
+            <div class="step-item"><div class="step-num">1</div><div class="step-text">Force-close the app and reopen it.</div></div>
+            <div class="step-item"><div class="step-num">2</div><div class="step-text">Check that you're on the latest version of ARISE in the App Store or Google Play.</div></div>
+            <div class="step-item"><div class="step-num">3</div><div class="step-text">Restart your phone.</div></div>
+            <div class="step-item"><div class="step-num">4</div><div class="step-text">If the issue persists, email us at <a href="mailto:hello@rsdigitallabs.com">hello@rsdigitallabs.com</a> with your device model and OS version.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item" data-text="streak lost reset broken wrong">
+        <button class="faq-btn" onclick="toggleFaq(this)">My streak disappeared. Can it be restored? <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Streaks are stored locally on your device and cannot be restored from the cloud if the app is deleted or the data is cleared. If you believe a streak was lost due to a bug (not a missed day), email us at <a href="mailto:hello@rsdigitallabs.com">hello@rsdigitallabs.com</a> and we'll investigate.</div>
+      </div>
+      <div class="faq-item" data-text="notification not showing up morning reminder">
+        <button class="faq-btn" onclick="toggleFaq(this)">I'm not getting my morning reminder. <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Check that ARISE has notification permission: go to your phone's Settings → Notifications → ARISE and make sure notifications are enabled. Also check that Do Not Disturb / Focus Mode isn't blocking the notification. If the issue continues, delete and re-grant notification permission inside the ARISE app via Settings → Notifications.</div>
+      </div>
+      <div class="faq-item" data-text="speech recognition microphone not detecting voice">
+        <button class="faq-btn" onclick="toggleFaq(this)">Speech recognition isn't detecting my voice. <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Make sure the microphone permission is granted (Settings → Privacy &amp; Security → Microphone → ARISE). Speak clearly and at normal volume with the phone held naturally. If you're in a noisy environment, move somewhere quieter or tap the count buttons manually — the app works either way.</div>
+      </div>
+      <div class="faq-item" data-text="android unlock screen not appearing">
+        <button class="faq-btn" onclick="toggleFaq(this)">ARISE isn't appearing when I unlock my phone (Android). <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="padding:16px 22px">Some Android devices restrict apps from launching on unlock. Go to your phone's Settings → Apps → ARISE → Battery → and make sure "Unrestricted" or "No restrictions" is selected. On some manufacturers (Samsung, Xiaomi, Oppo), you may also need to disable battery optimization specifically for ARISE. Contact us if you're unsure what setting applies to your device.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact bottom -->
+  <div class="contact-bottom">
+    <h2>Still need help?</h2>
+    <p>We read every message and get back to you within one business day. Tell us what's happening and we'll sort it out.</p>
+    <a href="mailto:hello@rsdigitallabs.com" class="contact-btn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 5l7 5 7-5"/></svg>
+      Email us
+    </a>
+    <p class="response-time">hello@rsdigitallabs.com · Response within 1 business day</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--black);color:rgba(255,255,255,.35);padding:36px 40px;border-top:1px solid #1A1610">
+  <div style="max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="../assets/arise/logo.png" alt="ARISE" style="width:24px;height:24px;border-radius:6px">
+      <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:rgba(255,255,255,.5)">ARISE</span>
+      <span style="font-size:12px;margin-left:6px">— by <a href="/" style="color:rgba(255,255,255,.35);text-decoration:none">RS Digital Labs</a></span>
+    </div>
+    <div style="display:flex;gap:16px">
+      <a href="privacy.html" style="font-size:12px;color:rgba(255,255,255,.3);text-decoration:none">Privacy</a>
+      <a href="terms.html" style="font-size:12px;color:rgba(255,255,255,.3);text-decoration:none">Terms</a>
+      <a href="support.html" style="font-size:12px;color:rgba(255,255,255,.3);text-decoration:none">Support</a>
+    </div>
+    <p style="font-size:12px">© 2026 RS Digital Labs</p>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.08 });
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const body = item.querySelector('.faq-body');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-body').classList.remove('open');
+  });
+  if (!isOpen) { item.classList.add('open'); body.classList.add('open'); }
+}
+
+function filterFaqs(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = (item.getAttribute('data-text') || '') + ' ' + item.querySelector('.faq-btn').textContent.toLowerCase();
+    item.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+  document.querySelectorAll('.faq-section').forEach(section => {
+    const visible = [...section.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
+    section.style.display = visible ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

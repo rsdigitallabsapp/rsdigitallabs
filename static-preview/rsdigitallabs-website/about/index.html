@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — RS Digital Labs</title>
+<meta name="description" content="RS Digital Labs is an independent mobile studio building focused, beautifully crafted apps. Based in the Philippines, shipping for the world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#fff;--off:#F8F8F6;--off2:#F2F0ED;
+  --black:#0D0D0D;--dark:#1A1A1A;--mid:#4A4A4A;--light:#8A8A8A;
+  --border:#E8E6E2;--surface:#F4F3F0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--mid);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--black);text-decoration:none;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.nav-logo-mark{width:30px;height:30px;background:var(--black);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:16px;height:16px;fill:white}
+.nav-right a{font-size:14px;font-weight:500;background:var(--black);color:var(--white);padding:10px 22px;border-radius:100px;text-decoration:none;transition:all .25s}
+.nav-right a:hover{background:var(--dark);transform:translateY(-1px)}
+
+/* Hero */
+.hero{min-height:70vh;display:flex;align-items:flex-end;padding:120px 48px 72px;background:var(--black);position:relative;overflow:hidden}
+.hero-noise{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1}
+.hero-label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:24px}
+h1.about-h1{font-family:'Syne',sans-serif;font-size:clamp(44px,6vw,84px);font-weight:800;letter-spacing:-.04em;line-height:1.0;color:white;max-width:800px}
+h1.about-h1 em{font-style:normal;color:rgba(255,255,255,.35)}
+
+/* Sections */
+section{padding:88px 48px}
+.section-inner{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--light)}
+h2.sh2{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.1;color:var(--black);margin-bottom:20px}
+
+/* Story */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.story-text p{font-size:17px;color:var(--mid);line-height:1.85;font-weight:300;margin-bottom:22px}
+.story-aside{padding-top:8px}
+.principle{padding:24px;border-radius:16px;border:1px solid var(--border);margin-bottom:16px;background:var(--off)}
+.principle-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--black);line-height:1;margin-bottom:8px;opacity:.15}
+.principle h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px}
+.principle p{font-size:14px;color:var(--mid);line-height:1.6;font-weight:300}
+
+/* Values */
+.values-section{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:48px}
+.value h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--black);margin-bottom:10px;letter-spacing:-.02em}
+.value p{font-size:15px;color:var(--mid);line-height:1.7;font-weight:300}
+.value-line{width:32px;height:2px;background:var(--black);margin-bottom:20px}
+
+/* CTA */
+.cta-section{background:var(--black);text-align:center}
+.cta-inner{max-width:600px;margin:0 auto}
+.cta-inner h2{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-.04em;color:white;margin-bottom:16px}
+.cta-inner p{font-size:17px;color:rgba(255,255,255,.5);margin-bottom:36px;font-weight:300;line-height:1.7}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-btn-white{font-size:14px;font-weight:500;background:white;color:var(--black);padding:14px 28px;border-radius:100px;text-decoration:none;transition:all .25s}
+.cta-btn-white:hover{background:#F0F0F0;transform:translateY(-2px)}
+.cta-btn-outline{font-size:14px;color:rgba(255,255,255,.5);padding:14px 24px;border:1px solid rgba(255,255,255,.15);border-radius:100px;text-decoration:none;transition:all .25s}
+.cta-btn-outline:hover{color:white;border-color:rgba(255,255,255,.4)}
+
+footer{background:#0D0D0D;color:rgba(255,255,255,.3);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px}
+footer a{color:rgba(255,255,255,.3);text-decoration:none;margin-left:20px;transition:color .2s}
+footer a:hover{color:rgba(255,255,255,.6)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .hero,.hero+*,section{padding:72px 24px}
+  .story-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+  footer{padding:32px 24px;flex-direction:column;align-items:flex-start;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark"><svg viewBox="0 0 16 16"><path d="M8 1L14 13H2L8 1Z"/></svg></div>
+    RS Digital Labs
+  </a>
+  <div class="nav-right"><a href="/contact/">Get in touch</a></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-inner">
+    <div class="hero-label">About RS Digital Labs</div>
+    <h1 class="about-h1">We build tools<br>people <em>actually</em><br>use every day.</h1>
+  </div>
+</div>
+
+<section>
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-text">
+        <div class="eyebrow reveal">Our story</div>
+        <h2 class="sh2 reveal reveal-delay-1">One studio.<br>One product at a time.</h2>
+        <p class="reveal reveal-delay-2">RS Digital Labs started with a simple frustration: most apps do too much and none of it particularly well. We set out to build differently — one focused product, designed around a single clear use case, executed with care.</p>
+        <p class="reveal reveal-delay-2">Our first app, ARISE, came from a personal morning practice. Every affirmation app felt bloated or performative. We wanted something that took ten seconds, worked on both platforms, and got out of the way. So we built it.</p>
+        <p class="reveal reveal-delay-2">We're a small studio based in the Philippines, building for a global audience. We don't have a roadmap that stretches five years into the future. We have apps we're proud of, users we actually talk to, and a commitment to keep improving what we ship.</p>
+      </div>
+      <div class="story-aside reveal reveal-delay-2">
+        <div class="principle">
+          <div class="principle-num">01</div>
+          <h3>One problem per app</h3>
+          <p>Feature creep is the enemy of usefulness. Every RS Digital Labs app solves one specific problem and earns its place in your life.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">02</div>
+          <h3>Both platforms, always</h3>
+          <p>Everything we build ships on iOS and Android simultaneously. Your platform choice shouldn't determine which apps you get to use.</p>
+        </div>
+        <div class="principle">
+          <div class="principle-num">03</div>
+          <h3>Earn attention, don't demand it</h3>
+          <p>We design for ten-second interactions, not engagement loops. If an app needs to manipulate you to be used, it hasn't earned the right to exist.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values-section">
+  <div class="section-inner">
+    <div class="eyebrow reveal">What we believe</div>
+    <h2 class="sh2 reveal reveal-delay-1">Design principles we don't compromise on.</h2>
+    <div class="values-grid">
+      <div class="value reveal reveal-delay-1">
+        <div class="value-line"></div>
+        <h3>Simplicity is a feature</h3>
+        <p>Everything in an app that isn't helping you accomplish your goal is working against it. We remove features, not add them, until what remains is clear.</p>
+      </div>
+      <div class="value reveal reveal-delay-2">
+        <div class="value-line"></div>
+        <h3>Quality before scale</h3>
+        <p>We'd rather have 1,000 people who love an app than 100,000 who tolerate it. Growth follows quality — not the other way around.</p>
+      </div>
+      <div class="value reveal reveal-delay-2">
+        <div class="value-line"></div>
+        <h3>Your data, your device</h3>
+        <p>We collect as little data as possible and protect what we do collect. You should never have to wonder what's happening with your information.</p>
+      </div>
+      <div class="value reveal">
+        <div class="value-line"></div>
+        <h3>Small team, real accountability</h3>
+        <p>When something breaks or you have a question, you're talking to the people who built it. No ticket queues. No chatbots. Real answers.</p>
+      </div>
+      <div class="value reveal reveal-delay-1">
+        <div class="value-line"></div>
+        <h3>Ship and improve</h3>
+        <p>A good app that exists is better than a perfect app that doesn't. We ship early, listen carefully, and improve continuously.</p>
+      </div>
+      <div class="value reveal reveal-delay-2">
+        <div class="value-line"></div>
+        <h3>Beautiful because it matters</h3>
+        <p>How something looks is how it feels to use. Good design isn't decoration — it's the thing that makes a tool feel effortless instead of effortful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="reveal">Start with ARISE.</h2>
+    <p class="reveal reveal-delay-1">Our first app is free to download. Ten seconds a day. See what happens when you speak to yourself before the world does.</p>
+    <div class="cta-btns reveal reveal-delay-2">
+      <a href="/arise/" class="cta-btn-white">Learn about ARISE →</a>
+      <a href="/contact/" class="cta-btn-outline">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 RS Digital Labs</span>
+  <div>
+    <a href="/">Home</a>
+    <a href="/arise/">ARISE</a>
+    <a href="/contact/">Contact</a>
+    <a href="/arise/privacy.html">Privacy</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — RS Digital Labs</title>
+<meta name="description" content="Get in touch with RS Digital Labs. We read every message and respond within one business day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#fff;--off:#F8F8F6;--black:#0D0D0D;--mid:#4A4A4A;--light:#8A8A8A;--border:#E8E6E2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--mid);-webkit-font-smoothing:antialiased;min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+nav{height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--black);text-decoration:none;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.nav-logo-mark{width:30px;height:30px;background:var(--black);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:16px;height:16px;fill:white}
+.nav-back{font-size:13px;color:var(--light);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--black)}
+
+/* Main layout */
+main{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 68px - 73px)}
+
+/* Left panel */
+.contact-left{background:var(--black);padding:72px 64px;display:flex;flex-direction:column;justify-content:space-between}
+.contact-left-content{}
+.left-eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px}
+h1.contact-h1{font-family:'Syne',sans-serif;font-size:clamp(36px,4vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.05;color:white;margin-bottom:28px}
+.contact-desc{font-size:16px;color:rgba(255,255,255,.45);line-height:1.8;font-weight:300;max-width:380px;margin-bottom:48px}
+.contact-channels{display:flex;flex-direction:column;gap:16px}
+.channel{display:flex;align-items:flex-start;gap:16px}
+.channel-icon{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.channel-icon svg{width:18px;height:18px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:1.5}
+.channel-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px}
+.channel-value{font-size:15px;color:rgba(255,255,255,.7);font-weight:400}
+.channel-value a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .2s}
+.channel-value a:hover{color:white}
+.contact-footer-note{font-size:13px;color:rgba(255,255,255,.2);line-height:1.6;padding-top:48px;border-top:1px solid rgba(255,255,255,.07)}
+
+/* Right panel */
+.contact-right{background:var(--white);padding:72px 64px;display:flex;align-items:flex-start;justify-content:center}
+.contact-form-wrap{width:100%;max-width:460px}
+h2.form-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.03em;color:var(--black);margin-bottom:8px}
+.form-sub{font-size:14px;color:var(--light);margin-bottom:36px}
+
+/* Form */
+.form-group{margin-bottom:20px}
+label{display:block;font-size:13px;font-weight:500;color:var(--black);margin-bottom:8px}
+input,select,textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--black);background:var(--off);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;appearance:none}
+input::placeholder,textarea::placeholder{color:var(--light)}
+input:focus,select:focus,textarea:focus{border-color:var(--black);background:var(--white)}
+textarea{resize:vertical;min-height:120px;line-height:1.6}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8A8A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px;padding-right:38px;cursor:pointer}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-submit{width:100%;padding:16px;background:var(--black);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;border:none;border-radius:12px;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.form-submit:hover{background:#1A1A1A;transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.15)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.form-note{font-size:12px;color:var(--light);text-align:center;margin-top:12px;line-height:1.6}
+.success-msg{display:none;padding:24px;background:#F0FFF4;border:1px solid #C6F6D5;border-radius:12px;margin-top:20px;text-align:center}
+.success-msg h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#276749;margin-bottom:4px}
+.success-msg p{font-size:14px;color:#4A7D4E}
+
+footer{background:var(--off);border-top:1px solid var(--border);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px}
+footer a{color:var(--light);text-decoration:none;margin-left:16px;transition:color .2s}
+footer a:hover{color:var(--black)}
+
+@media(max-width:900px){
+  nav{padding:0 24px}
+  main{grid-template-columns:1fr}
+  .contact-left{padding:48px 28px}
+  .contact-right{padding:48px 28px}
+  footer{padding:20px 24px}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark"><svg viewBox="0 0 16 16"><path d="M8 1L14 13H2L8 1Z"/></svg></div>
+    RS Digital Labs
+  </a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<main>
+  <!-- Left -->
+  <div class="contact-left">
+    <div class="contact-left-content">
+      <div class="left-eyebrow">Get in touch</div>
+      <h1 class="contact-h1">We read<br>every message.</h1>
+      <p class="contact-desc">Questions about our apps, feedback, press inquiries, partnership ideas — send it our way. You'll hear back from a real person within one business day.</p>
+      <div class="contact-channels">
+        <div class="channel">
+          <div class="channel-icon">
+            <svg viewBox="0 0 18 18"><rect x="1" y="3" width="16" height="12" rx="2"/><path d="M1 5l8 6 8-6"/></svg>
+          </div>
+          <div>
+            <div class="channel-label">Email</div>
+            <div class="channel-value"><a href="mailto:hello@rsdigitallabs.com">hello@rsdigitallabs.com</a></div>
+          </div>
+        </div>
+        <div class="channel">
+          <div class="channel-icon">
+            <svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 2"/></svg>
+          </div>
+          <div>
+            <div class="channel-label">Response time</div>
+            <div class="channel-value">Within 1 business day</div>
+          </div>
+        </div>
+        <div class="channel">
+          <div class="channel-icon">
+            <svg viewBox="0 0 18 18"><path d="M9 1L17 16H1L9 1Z"/></svg>
+          </div>
+          <div>
+            <div class="channel-label">ARISE support</div>
+            <div class="channel-value"><a href="/arise/support.html">arise support page</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="contact-footer-note">Based in the Philippines. Building for a global audience. We work Monday–Friday, Manila time (UTC+8).</p>
+  </div>
+
+  <!-- Right -->
+  <div class="contact-right">
+    <div class="contact-form-wrap">
+      <h2 class="form-title">Send us a message</h2>
+      <p class="form-sub">Fill in the form and we'll get back to you shortly.</p>
+      <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First name</label>
+            <input type="text" id="fname" name="fname" placeholder="Maria" required autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" name="lname" placeholder="Santos" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="subject">What is this about?</label>
+          <select id="subject" name="subject">
+            <option value="">Select a topic</option>
+            <option value="arise-support">ARISE — app support</option>
+            <option value="arise-subscription">ARISE — subscription / billing</option>
+            <option value="arise-feedback">ARISE — feedback</option>
+            <option value="other-app">Another app</option>
+            <option value="press">Press inquiry</option>
+            <option value="partnership">Partnership</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Your message</label>
+          <textarea id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">
+          Send message
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </button>
+        <p class="form-note">By submitting this form, you agree to our <a href="/arise/privacy.html" style="color:var(--mid)">Privacy Policy</a>. We don't send marketing email.</p>
+      </form>
+      <div class="success-msg" id="successMsg">
+        <h3>Message received.</h3>
+        <p>We'll get back to you within one business day. Thank you.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>© 2026 RS Digital Labs</span>
+  <div>
+    <a href="/">Home</a>
+    <a href="/arise/">ARISE</a>
+    <a href="/about/">About</a>
+    <a href="/arise/privacy.html">Privacy</a>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('successMsg');
+
+  // Basic validation
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  const fname = document.getElementById('fname').value;
+  if (!email || !message || !fname) { alert('Please fill in all required fields.'); return; }
+
+  // Simulate submission (replace with actual endpoint)
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  setTimeout(() => {
+    form.style.display = 'none';
+    success.style.display = 'block';
+  }, 1200);
+}
+</script>
+</body>
+</html>

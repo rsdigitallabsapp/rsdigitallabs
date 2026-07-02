@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARISE — Before the world speaks to you, speak to yourself.</title>
+<meta name="description" content="ARISE is your morning affirmation ritual. One statement, spoken aloud, three times. In under ten seconds. Available on iOS and Android.">
+<meta property="og:title" content="ARISE — Morning Affirmations">
+<meta property="og:description" content="Before the world speaks to you, speak to yourself. Your morning ritual, in under ten seconds.">
+<meta property="og:image" content="../assets/arise/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#13110D;--surface:#1D1A14;--elevated:#25211A;
+  --border:#332D24;--ring:#332D24;
+  --sage:#8AAF8E;--sage-light:#AECAAE;--sage-dim:#3D5E41;
+  --cream:#EDE6D6;--cream-dim:#9B9080;--cream-muted:#5A5248;
+  --terra:#C4714E;
+  --white:#ffffff;--black:#0D0D0D;
+  --off:#F8F8F6;--grey:#4A4A4A;--border-lt:#E8E6E2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(19,17,13,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{width:32px;height:32px;border-radius:8px}
+.nav-logo-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--cream);letter-spacing:-.02em}
+.nav-center{display:flex;align-items:center;gap:4px}
+.nav-link{font-size:14px;color:var(--cream-dim);text-decoration:none;padding:8px 14px;border-radius:8px;transition:all .2s}
+.nav-link:hover{color:var(--cream);background:rgba(255,255,255,.06)}
+.nav-right{display:flex;gap:12px;align-items:center}
+.nav-back{font-size:13px;color:var(--cream-dim);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .2s}
+.nav-back:hover{color:var(--cream)}
+.nav-cta{font-size:13px;font-weight:500;background:var(--sage);color:var(--bg);padding:10px 22px;border-radius:100px;text-decoration:none;transition:all .25s}
+.nav-cta:hover{background:var(--sage-light);transform:translateY(-1px);box-shadow:0 8px 20px rgba(138,175,142,.25)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--cream);border-radius:2px}
+.mob-menu{display:none;position:fixed;inset:0;background:var(--bg);z-index:490;flex-direction:column;align-items:flex-start;justify-content:center;padding:48px;gap:8px}
+.mob-menu.open{display:flex}
+.mob-link{font-family:'Syne',sans-serif;font-size:32px;font-weight:700;color:var(--cream);text-decoration:none;padding:8px 0}
+.mob-divider{width:40px;height:1px;background:var(--border);margin:16px 0}
+.mob-close{position:absolute;top:24px;right:40px;font-size:24px;background:none;border:none;cursor:pointer;color:var(--cream-dim)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+.hero-grain{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;pointer-events:none}
+.hero-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(138,175,142,.12) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center}
+.hero-left{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:28px;border:1px solid var(--sage-dim);padding:6px 14px;border-radius:100px;background:rgba(138,175,142,.08)}
+h1.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(40px,5.5vw,70px);font-weight:800;line-height:1.05;letter-spacing:-.04em;color:var(--cream);margin-bottom:24px}
+.hero-h1 em{font-style:normal;color:var(--sage)}
+.hero-sub{font-size:18px;color:var(--cream-dim);line-height:1.7;font-weight:300;margin-bottom:20px;max-width:480px}
+.hero-sub2{font-size:15px;color:var(--cream-muted);line-height:1.65;margin-bottom:40px;max-width:420px}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:40px}
+.btn-sage{font-size:14px;font-weight:500;background:var(--sage);color:var(--bg);padding:14px 30px;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .25s}
+.btn-sage:hover{background:var(--sage-light);transform:translateY(-2px);box-shadow:0 16px 40px rgba(138,175,142,.25)}
+.btn-outline{font-size:14px;font-weight:400;color:var(--cream-dim);padding:14px 24px;border:1px solid var(--border);border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .25s}
+.btn-outline:hover{color:var(--cream);border-color:var(--cream-muted)}
+.hero-stores{display:flex;gap:12px;flex-wrap:wrap}
+.store-badge{display:flex;align-items:center;gap:10px;padding:12px 20px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);text-decoration:none;transition:all .2s}
+.store-badge:hover{border-color:var(--cream-muted);background:rgba(255,255,255,.06)}
+.store-badge-icon{width:22px;height:22px;fill:var(--cream);flex-shrink:0}
+.store-badge-text .store-badge-sub{font-size:10px;color:var(--cream-dim);letter-spacing:.04em}
+.store-badge-text .store-badge-name{font-size:14px;font-weight:500;color:var(--cream);line-height:1.2}
+
+/* ── PHONE MOCKUP ── */
+.hero-phone{position:relative;display:flex;justify-content:center}
+.phone-frame{width:280px;height:560px;background:var(--surface);border:1.5px solid var(--border);border-radius:44px;position:relative;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04) inset}
+.phone-notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:80px;height:24px;background:var(--bg);border-radius:14px;z-index:10}
+.phone-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px 32px;background:linear-gradient(180deg,var(--bg) 0%,var(--surface) 100%)}
+.phone-streak{text-align:center;margin-bottom:28px}
+.phone-streak-num{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:var(--sage);line-height:1}
+.phone-streak-label{font-size:11px;color:var(--cream-muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.phone-affirmation{text-align:center;margin-bottom:36px;padding:0 8px}
+.phone-affirmation-text{font-size:15px;color:var(--cream);line-height:1.55;font-weight:300;font-style:italic}
+.phone-circles{display:flex;gap:16px;margin-bottom:36px}
+.phone-circle{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--sage-dim);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--sage);font-weight:500;letter-spacing:.06em;transition:all .4s}
+.phone-circle.done{background:var(--sage);border-color:var(--sage);color:var(--bg)}
+.phone-btn{width:100%;background:var(--sage);color:var(--bg);border:none;border-radius:14px;padding:16px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer}
+.phone-float{position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:var(--elevated);border:1px solid var(--border);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 20px 48px rgba(0,0,0,.4)}
+.phone-float-num{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--sage)}
+.phone-float-label{font-size:9px;color:var(--cream-muted);letter-spacing:.08em;text-transform:uppercase}
+
+/* ── SECTIONS (light bg) ── */
+.section-dark{background:var(--bg);padding:100px 48px}
+.section-light{background:var(--white);padding:100px 48px;color:var(--black)}
+.section-off{background:var(--off);padding:100px 48px;color:var(--black)}
+.section-inner{max-width:1100px;margin:0 auto}
+
+/* ── HOW IT WORKS ── */
+.how-header{text-align:center;margin-bottom:72px}
+.eyebrow-dark{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);margin-bottom:16px}
+.eyebrow-light{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-bottom:16px}
+h2.h2-dark{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1.1;color:var(--cream);margin-bottom:16px}
+h2.h2-light{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1.1;color:var(--black);margin-bottom:16px}
+.sub-dark{font-size:17px;color:var(--cream-dim);line-height:1.7;font-weight:300;max-width:480px;margin:0 auto}
+.sub-light{font-size:17px;color:var(--grey);line-height:1.7;font-weight:300;max-width:480px;margin:0 auto}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+.step{padding:48px 36px;background:var(--surface);position:relative;overflow:hidden}
+.step-num{font-family:'Syne',sans-serif;font-size:80px;font-weight:800;color:var(--ring);line-height:1;margin-bottom:20px;letter-spacing:-.05em}
+.step h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--cream);margin-bottom:12px;letter-spacing:-.02em}
+.step p{font-size:15px;color:var(--cream-dim);line-height:1.65;font-weight:300}
+.step-icon{position:absolute;top:40px;right:36px;font-size:28px;opacity:.3}
+
+/* ── WHY ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.why-text h2{margin-bottom:24px}
+.why-text p{font-size:16px;line-height:1.8;color:var(--grey);font-weight:300;margin-bottom:20px}
+.why-points{display:flex;flex-direction:column;gap:16px;margin-top:36px}
+.why-point{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--white);border:1px solid var(--border-lt);border-radius:16px}
+.why-point-icon{width:40px;height:40px;border-radius:12px;background:var(--off);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-point-icon svg{width:18px;height:18px}
+.why-point h4{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px}
+.why-point p{font-size:13px;color:var(--grey);line-height:1.55;margin:0}
+
+/* ── FEATURES ── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
+.feature-card{padding:32px 28px;border-radius:20px;border:1px solid var(--border-lt);background:var(--white)}
+.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.feature-card h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--black);margin-bottom:8px;letter-spacing:-.02em}
+.feature-card p{font-size:14px;color:var(--grey);line-height:1.65;font-weight:300}
+.feature-badge{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:#F0FFF0;color:#4A7D4E;border:1px solid #C8E6C9;margin-top:12px}
+
+/* ── CATEGORIES ── */
+.cat-grid{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;justify-content:center}
+.cat-pill{padding:10px 20px;border:1px solid var(--border);border-radius:100px;font-size:14px;color:var(--cream-dim);background:var(--surface);transition:all .2s}
+.cat-pill:hover{border-color:var(--sage);color:var(--sage);background:rgba(138,175,142,.06)}
+.cat-pill.active{border-color:var(--sage);color:var(--sage);background:rgba(138,175,142,.1)}
+
+/* ── PREMIUM ── */
+.premium-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.premium-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.premium-cards{display:flex;flex-direction:column;gap:12px}
+.price-card{padding:20px 24px;border-radius:16px;border:1.5px solid var(--border);background:var(--elevated);display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .25s}
+.price-card.selected{border-color:var(--sage);background:rgba(138,175,142,.06)}
+.price-card-left{display:flex;align-items:center;gap:14px}
+.price-radio{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.price-card.selected .price-radio{border-color:var(--sage);background:var(--sage)}
+.price-radio::after{content:'';width:7px;height:7px;border-radius:50%;background:var(--bg);opacity:0;transition:opacity .2s}
+.price-card.selected .price-radio::after{opacity:1}
+.price-name{font-size:15px;font-weight:500;color:var(--cream)}
+.price-period{font-size:12px;color:var(--cream-muted)}
+.price-right{text-align:right}
+.price-amount{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--cream)}
+.price-per{font-size:12px;color:var(--cream-muted)}
+.price-badge{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:var(--sage);color:var(--bg)}
+.premium-fine{font-size:12px;color:var(--cream-muted);line-height:1.6;margin-top:12px}
+.premium-perks{list-style:none;display:flex;flex-direction:column;gap:14px;margin:28px 0}
+.premium-perk{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--cream-dim);line-height:1.5}
+.perk-check{width:20px;height:20px;border-radius:6px;background:rgba(138,175,142,.12);border:1px solid var(--sage-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.perk-check svg{width:11px;height:11px;stroke:var(--sage);fill:none;stroke-width:2.5}
+
+/* ── TESTIMONIALS ── */
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
+.testimonial{padding:28px;background:var(--off);border-radius:20px;border:1px solid var(--border-lt)}
+.testimonial-stars{color:#F59E0B;font-size:14px;margin-bottom:14px;letter-spacing:2px}
+.testimonial-text{font-size:15px;color:var(--grey);line-height:1.65;font-weight:300;margin-bottom:20px;font-style:italic}
+.testimonial-author{font-size:13px;font-weight:500;color:var(--black)}
+.testimonial-role{font-size:12px;color:var(--grey);margin-top:2px}
+
+/* ── FAQ ── */
+.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:1px;border-radius:16px;overflow:hidden;border:1px solid var(--border-lt)}
+.faq-item{background:var(--white)}
+.faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 28px;background:none;border:none;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--black);border-bottom:1px solid var(--border-lt);transition:background .2s}
+.faq-btn:hover{background:var(--off)}
+.faq-icon{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:13px;color:var(--grey)}
+.faq-item.open .faq-icon{background:var(--black);border-color:var(--black);color:white;transform:rotate(45deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:15px;color:var(--grey);line-height:1.7;font-weight:300;border-bottom:1px solid var(--border-lt);background:var(--off)}
+.faq-body.open{max-height:200px;padding:20px 28px}
+
+/* ── DOWNLOAD CTA ── */
+.download-section{background:var(--bg);padding:100px 48px;text-align:center;position:relative;overflow:hidden}
+.download-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(138,175,142,.1) 0%,transparent 70%);pointer-events:none}
+.download-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.download-logo{width:90px;height:90px;border-radius:24px;overflow:hidden;margin:0 auto 28px;border:1px solid var(--border)}
+.download-logo img{width:100%;height:100%;object-fit:cover}
+.download-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-center{display:none}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero{padding:100px 24px 60px}
+  .hero-inner{grid-template-columns:1fr;gap:48px}
+  .hero-phone{display:none}
+  .section-dark,.section-light,.section-off,.premium-section{padding:72px 24px}
+  .steps-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+  .premium-inner{grid-template-columns:1fr}
+  .testimonials-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="../assets/arise/logo.png" alt="ARISE">
+    <span class="nav-logo-name">ARISE</span>
+  </a>
+  <div class="nav-center">
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#premium" class="nav-link">Premium</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="support.html" class="nav-link">Support</a>
+  </div>
+  <div class="nav-right">
+    <a href="/" class="nav-back">← RS Digital Labs</a>
+    <a href="#download" class="nav-cta">Download free</a>
+    <button class="hamburger" onclick="document.querySelector('.mob-menu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu">
+  <button class="mob-close" onclick="document.querySelector('.mob-menu').classList.remove('open')">✕</button>
+  <a href="#how" class="mob-link" onclick="document.querySelector('.mob-menu').classList.remove('open')">How it works</a>
+  <a href="#features" class="mob-link" onclick="document.querySelector('.mob-menu').classList.remove('open')">Features</a>
+  <a href="#premium" class="mob-link" onclick="document.querySelector('.mob-menu').classList.remove('open')">Premium</a>
+  <a href="#faq" class="mob-link" onclick="document.querySelector('.mob-menu').classList.remove('open')">FAQ</a>
+  <div class="mob-divider"></div>
+  <a href="#download" class="mob-link" onclick="document.querySelector('.mob-menu').classList.remove('open')">Download</a>
+  <a href="/" class="mob-link">← RS Digital Labs</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow reveal">Morning Affirmations</div>
+      <h1 class="hero-h1 reveal reveal-delay-1">Before the world<br>speaks to you,<br><em>speak to yourself.</em></h1>
+      <p class="hero-sub reveal reveal-delay-2">One affirmation, three times, ten seconds. That's your morning ritual with ARISE.</p>
+      <p class="hero-sub2 reveal reveal-delay-2">Say it. Mean it. Begin. The words you give yourself in the first moments of the day become the lens through which you see the rest of it.</p>
+      <div class="hero-stores reveal reveal-delay-3">
+        <a href="#download" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.19 1.28-2.17 3.81.03 3.02 2.65 4.03 2.68 4.04l-.06.23zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="store-badge-text"><div class="store-badge-sub">Download on the</div><div class="store-badge-name">App Store</div></div>
+        </a>
+        <a href="#download" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76c.28.16.64.17.97-.01l12.12-6.96-2.54-2.56-10.55 9.53zM.45 2.34C.17 2.64 0 3.11 0 3.73v16.54c0 .62.17 1.09.45 1.39l.07.07 9.27-9.27v-.21L.52 2.27l-.07.07zM20.29 9.62l-2.61-1.5-2.85 2.87 2.85 2.87 2.62-1.5c.75-.43.75-1.31-.01-1.74zM3.18.24L15.3 7.21 12.76 9.77 2.21.24C2.54.06 2.9.07 3.18.24z"/></svg>
+          <div class="store-badge-text"><div class="store-badge-sub">Get it on</div><div class="store-badge-name">Google Play</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="hero-phone reveal reveal-delay-2">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-streak">
+            <div class="phone-streak-num" id="streakNum">7</div>
+            <div class="phone-streak-label">Day streak</div>
+          </div>
+          <div class="phone-affirmation">
+            <div class="phone-affirmation-text">"I am worthy of everything I work toward."</div>
+          </div>
+          <div class="phone-circles">
+            <div class="phone-circle done" id="c1">1×</div>
+            <div class="phone-circle done" id="c2">2×</div>
+            <div class="phone-circle" id="c3">3×</div>
+          </div>
+          <button class="phone-btn" onclick="pulsePhone()">Speak aloud</button>
+        </div>
+      </div>
+      <div class="phone-float">
+        <div class="phone-float-num">↑</div>
+        <div class="phone-float-label">Momentum</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="section-dark">
+  <div class="section-inner">
+    <div class="how-header reveal">
+      <div class="eyebrow-dark">How it works</div>
+      <h2 class="h2-dark">Three steps. Ten seconds.<br>Every morning.</h2>
+      <p class="sub-dark">ARISE removes every excuse. There's nothing to set up, nothing to track, nothing to configure. Just you and one intention.</p>
+    </div>
+    <div class="steps-grid reveal reveal-delay-1">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Unlock your phone</h3>
+        <p>ARISE knows when you pick up your phone for the first time each morning. No alarm needed — your own routine is the trigger.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Read your affirmation</h3>
+        <p>A single, carefully chosen statement greets you. Tap the button, say it aloud. Three times. The voice matters — it's yours.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Begin your day</h3>
+        <p>That's it. Ten seconds. Your streak grows, your intention is set, and you carry that statement into everything that follows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ARISE -->
+<section class="section-light">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-text">
+        <div class="eyebrow-light reveal">Why ARISE</div>
+        <h2 class="h2-light reveal reveal-delay-1">What you say in the first minute matters most.</h2>
+        <p class="reveal reveal-delay-2">The first thing your brain hears each morning shapes how you interpret the day. Most of us fill that moment with notifications, news, and noise that has nothing to do with us.</p>
+        <p class="reveal reveal-delay-2">ARISE interrupts that pattern with one small act: your own words, spoken back to yourself. That's it. The research on intention-setting, positive self-talk, and habit formation all point to the same conclusion — mornings are the leverage point.</p>
+      </div>
+      <div class="why-points reveal reveal-delay-2">
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#8AAF8E" stroke-width="1.5"><path d="M9 3v12M3 9h12"/><circle cx="9" cy="9" r="7"/></svg>
+          </div>
+          <div>
+            <h4>Intentional, not automatic</h4>
+            <p>You choose your categories. ARISE adapts your affirmations to what actually matters to you right now.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#8AAF8E" stroke-width="1.5"><path d="M9 1l2 5.5H17L12.5 10l1.7 5.5L9 12.5 4.8 15.5l1.7-5.5L2 6.5h6z"/></svg>
+          </div>
+          <div>
+            <h4>Built for streaks, not guilt</h4>
+            <p>The streak exists to celebrate consistency, not punish breaks. Premium users can shield their streak on rough mornings.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg viewBox="0 0 18 18" fill="none" stroke="#8AAF8E" stroke-width="1.5"><path d="M3 9a6 6 0 1 0 12 0A6 6 0 0 0 3 9z"/><path d="M9 6v3l2 2"/></svg>
+          </div>
+          <div>
+            <h4>Ten seconds, not ten minutes</h4>
+            <p>No journaling. No meditation timer. No guided content to sit through. ARISE respects your morning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section-off">
+  <div class="section-inner" style="text-align:center">
+    <div class="eyebrow-light reveal">Affirmation categories</div>
+    <h2 class="h2-light reveal reveal-delay-1">Pick what speaks to you.</h2>
+    <p class="sub-light reveal reveal-delay-1">Choose one or several. ARISE rotates affirmations across your selected categories each day.</p>
+    <div class="cat-grid reveal reveal-delay-2">
+      <div class="cat-pill active">Self-Worth</div>
+      <div class="cat-pill">Confidence</div>
+      <div class="cat-pill">Abundance</div>
+      <div class="cat-pill">Health</div>
+      <div class="cat-pill active">Inner Peace</div>
+      <div class="cat-pill">Career</div>
+      <div class="cat-pill">Love &amp; Relationships</div>
+      <div class="cat-pill">Creativity</div>
+      <div class="cat-pill active">Resilience</div>
+      <div class="cat-pill">Gratitude</div>
+      <div class="cat-pill">Spirituality</div>
+      <div class="cat-pill">Motherhood</div>
+      <div class="cat-pill">Purpose</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="section-light">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:60px">
+      <div class="eyebrow-light reveal">Features</div>
+      <h2 class="h2-light reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon" style="background:#F0FFF0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#4A7D4E" stroke-width="1.5"><path d="M10 2v16M2 10h16"/><circle cx="10" cy="10" r="8"/></svg></div>
+        <h3>Daily affirmation</h3>
+        <p>A fresh statement each morning drawn from the categories you've chosen. Curated for clarity, not cliché.</p>
+        <div class="feature-badge">Free</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon" style="background:#FFF8F0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9C6A3E" stroke-width="1.5"><path d="M10 2L12.5 8H18L13.5 11.5 15.5 18 10 14.5 4.5 18 6.5 11.5 2 8H7.5z"/></svg></div>
+        <h3>Streak tracking</h3>
+        <p>Watch your daily practice grow into a habit. Your streak is visible, but never used against you.</p>
+        <div class="feature-badge">Free</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon" style="background:#F0F4FF"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#3B5CB8" stroke-width="1.5"><path d="M6 10a4 4 0 1 0 8 0 4 4 0 0 0-8 0z"/><path d="M2 10h2M16 10h2M10 2v2M10 16v2"/></svg></div>
+        <h3>Unlock detection</h3>
+        <p>ARISE appears when you first pick up your phone in the morning. No alarm, no reminder, no friction — it's just there.</p>
+        <div class="feature-badge">Free</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon" style="background:#F5F0FF"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#7C3AED" stroke-width="1.5"><path d="M4 4h12v12H4zM8 8h4M8 12h4"/></svg></div>
+        <h3>Custom affirmations</h3>
+        <p>Write your own statements in your own words. Your voice is the most powerful one in the room.</p>
+        <div class="feature-badge" style="background:#F5F0FF;color:#7C3AED;border-color:#D8C7FF">Premium</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon" style="background:#FFF0F5"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C4416A" stroke-width="1.5"><path d="M10 5v10M5 10h10M10 2a8 8 0 1 0 0 16A8 8 0 0 0 10 2z"/></svg></div>
+        <h3>Streak Shield</h3>
+        <p>Life happens. A streak shield protects your progress on the days that genuinely get away from you.</p>
+        <div class="feature-badge" style="background:#FFF0F5;color:#C4416A;border-color:#FFD0E0">Premium</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon" style="background:#FFFBF0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#A07820" stroke-width="1.5"><path d="M10 2L2 7v11h16V7L10 2zM8 18v-6h4v6"/></svg></div>
+        <h3>All categories</h3>
+        <p>Unlock every affirmation category, including new ones added over time. One subscription, always up to date.</p>
+        <div class="feature-badge" style="background:#FFFBF0;color:#A07820;border-color:#FFE9A0">Premium</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM -->
+<section id="premium" class="premium-section" style="padding:100px 48px">
+  <div class="premium-inner">
+    <div>
+      <div class="eyebrow-dark reveal">Go Premium</div>
+      <h2 class="h2-dark reveal reveal-delay-1">One subscription.<br>Unlimited intention.</h2>
+      <ul class="premium-perks reveal reveal-delay-2">
+        <li class="premium-perk"><span class="perk-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Write unlimited custom affirmations in your own words</li>
+        <li class="premium-perk"><span class="perk-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Access every affirmation category</li>
+        <li class="premium-perk"><span class="perk-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Streak Shield to protect your progress</li>
+        <li class="premium-perk"><span class="perk-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>All future premium features included</li>
+        <li class="premium-perk"><span class="perk-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Cancel anytime. No commitment required.</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="premium-cards">
+        <div class="price-card" onclick="selectPlan(this)">
+          <div class="price-card-left">
+            <div class="price-radio"></div>
+            <div><div class="price-name">Monthly</div><div class="price-period">Billed monthly</div></div>
+          </div>
+          <div class="price-right">
+            <div class="price-amount">$4.99</div>
+            <div class="price-per">per month</div>
+          </div>
+        </div>
+        <div class="price-card" onclick="selectPlan(this)">
+          <div class="price-card-left">
+            <div class="price-radio"></div>
+            <div><div class="price-name">3 Months</div><div class="price-period">Billed every 3 months</div></div>
+          </div>
+          <div class="price-right">
+            <div class="price-amount">$11.99</div>
+            <div class="price-per">$4.00/month</div>
+          </div>
+        </div>
+        <div class="price-card selected" onclick="selectPlan(this)">
+          <div class="price-card-left">
+            <div class="price-radio"></div>
+            <div>
+              <div class="price-name">Annual <span class="price-badge">Most Popular</span></div>
+              <div class="price-period">Billed yearly · Save 42%</div>
+            </div>
+          </div>
+          <div class="price-right">
+            <div class="price-amount">$34.99</div>
+            <div class="price-per">$2.92/month</div>
+          </div>
+        </div>
+      </div>
+      <p class="premium-fine">Subscriptions auto-renew. Cancel anytime in your App Store or Google Play settings. Prices in USD. Payment charged to your account at confirmation of purchase.</p>
+      <a href="#download" class="btn-sage" style="margin-top:20px;display:inline-flex">Download to subscribe →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-light">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0">
+      <div class="eyebrow-light reveal">What users say</div>
+      <h2 class="h2-light reveal reveal-delay-1">Small practice.<br>Real shift.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I've tried journaling, meditation apps, all of it. ARISE is the only thing I've actually kept up with because it takes ten seconds and it works."</p>
+        <div class="testimonial-author">Mariana T.</div>
+        <div class="testimonial-role">Designer, Mexico City</div>
+      </div>
+      <div class="testimonial reveal reveal-delay-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I wrote my own affirmation on day three. Seeing my own words back at me every morning hit different. Premium was worth it immediately."</p>
+        <div class="testimonial-author">Drea K.</div>
+        <div class="testimonial-role">Founder, Toronto</div>
+      </div>
+      <div class="testimonial reveal reveal-delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"It shows up exactly when I unlock my phone. I don't have to remember it, open it, or search for motivation. It's just there, waiting."</p>
+        <div class="testimonial-author">James R.</div>
+        <div class="testimonial-role">Teacher, London</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section-off">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:0">
+      <div class="eyebrow-light reveal">Questions</div>
+      <h2 class="h2-light reveal reveal-delay-1">Everything you need to know.</h2>
+    </div>
+    <div class="faq-list reveal reveal-delay-2">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">Is ARISE free to use? <span class="faq-icon">+</span></button>
+        <div class="faq-body">Yes. ARISE is free to download and use. The free version includes a daily affirmation, streak tracking, and access to a curated selection of categories. Premium unlocks custom affirmations, all categories, Streak Shield, and future features.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">How does ARISE know when I wake up? <span class="faq-icon">+</span></button>
+        <div class="faq-body">ARISE uses your phone's unlock detection to appear in the morning window (4AM–4PM). On Android, it detects your first phone unlock of the day. On iOS, it activates when the app comes to the foreground after your morning notification tap. There's no GPS, no personal data collected — it simply listens for your phone to wake up.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">Can I choose my own affirmations? <span class="faq-icon">+</span></button>
+        <div class="faq-body">Yes — with ARISE Premium. Write unlimited affirmations in your own words, and they'll appear alongside curated ones in your daily rotation. Your words, in your voice, every morning.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">What happens if I miss a day? <span class="faq-icon">+</span></button>
+        <div class="faq-body">Your streak resets to zero — but you can always start again. Premium users can use a Streak Shield on days when life gets in the way. The streak is there to encourage you, not make you feel bad.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">How does billing work for Premium? <span class="faq-icon">+</span></button>
+        <div class="faq-body">Premium is a subscription that auto-renews at the end of each billing period (monthly, 3-month, or annual). You can cancel anytime from your App Store or Google Play account settings. Cancellation takes effect at the end of the current period — you keep access until then.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">Is ARISE available on Android? <span class="faq-icon">+</span></button>
+        <div class="faq-body">Yes. ARISE is available on both iOS (App Store) and Android (Google Play). All features work across both platforms, including Premium.</div>
+      </div>
+      <div class="faq-item" style="border-bottom:none">
+        <button class="faq-btn" onclick="toggleFaq(this)" style="border-bottom:none">I have a question that isn't here. <span class="faq-icon">+</span></button>
+        <div class="faq-body" style="border-bottom:none">Reach out to us at <a href="mailto:hello@rsdigitallabs.com" style="color:var(--grey);font-weight:500">hello@rsdigitallabs.com</a> or visit our <a href="support.html" style="color:var(--grey);font-weight:500">support page</a>. We read and respond to every message.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download-section">
+  <div class="download-glow"></div>
+  <div class="download-inner">
+    <div class="download-logo reveal"><img src="../assets/arise/logo.png" alt="ARISE"></div>
+    <div class="eyebrow-dark reveal">Download ARISE</div>
+    <h2 class="h2-dark reveal reveal-delay-1">Your morning<br>starts here.</h2>
+    <p class="sub-dark reveal reveal-delay-1">Free to download. No account required. Ten seconds. Every morning.</p>
+    <div class="download-actions reveal reveal-delay-2">
+      <a href="#" class="store-badge" style="border-color:var(--border);background:rgba(255,255,255,.05)">
+        <svg class="store-badge-icon" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.19 1.28-2.17 3.81.03 3.02 2.65 4.03 2.68 4.04l-.06.23zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="store-badge-text"><div class="store-badge-sub">Download on the</div><div class="store-badge-name">App Store</div></div>
+      </a>
+      <a href="#" class="store-badge" style="border-color:var(--border);background:rgba(255,255,255,.05)">
+        <svg class="store-badge-icon" viewBox="0 0 24 24"><path d="M3.18 23.76c.28.16.64.17.97-.01l12.12-6.96-2.54-2.56-10.55 9.53zM.45 2.34C.17 2.64 0 3.11 0 3.73v16.54c0 .62.17 1.09.45 1.39l.07.07 9.27-9.27v-.21L.52 2.27l-.07.07zM20.29 9.62l-2.61-1.5-2.85 2.87 2.85 2.87 2.62-1.5c.75-.43.75-1.31-.01-1.74zM3.18.24L15.3 7.21 12.76 9.77 2.21.24C2.54.06 2.9.07 3.18.24z"/></svg>
+        <div class="store-badge-text"><div class="store-badge-sub">Get it on</div><div class="store-badge-name">Google Play</div></div>
+      </a>
+    </div>
+    <p style="font-size:13px;color:var(--cream-muted);margin-top:20px" class="reveal reveal-delay-3">
+      <a href="privacy.html" style="color:var(--cream-muted);text-decoration:none;transition:color .2s">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="terms.html" style="color:var(--cream-muted);text-decoration:none;transition:color .2s">Terms of Service</a> &nbsp;·&nbsp;
+      <a href="support.html" style="color:var(--cream-muted);text-decoration:none;transition:color .2s">Support</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0D0B08;color:rgba(255,255,255,.35);padding:40px 48px;border-top:1px solid #1A1610">
+  <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="../assets/arise/logo.png" alt="ARISE" style="width:28px;height:28px;border-radius:7px">
+      <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,.6)">ARISE</span>
+      <span style="font-size:13px;margin-left:8px">— by <a href="/" style="color:rgba(255,255,255,.4);text-decoration:none">RS Digital Labs</a></span>
+    </div>
+    <div style="display:flex;gap:20px">
+      <a href="privacy.html" style="font-size:13px;color:rgba(255,255,255,.3);text-decoration:none">Privacy</a>
+      <a href="terms.html" style="font-size:13px;color:rgba(255,255,255,.3);text-decoration:none">Terms</a>
+      <a href="support.html" style="font-size:13px;color:rgba(255,255,255,.3);text-decoration:none">Support</a>
+    </div>
+    <p style="font-size:13px">© 2026 RS Digital Labs</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// FAQ
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const body = item.querySelector('.faq-body');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-body').classList.remove('open');
+  });
+  if (!isOpen) { item.classList.add('open'); body.classList.add('open'); }
+}
+
+// Premium plan selector
+function selectPlan(card) {
+  document.querySelectorAll('.price-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+}
+
+// Phone mockup interaction
+function pulsePhone() {
+  const c3 = document.getElementById('c3');
+  c3.classList.add('done');
+  c3.textContent = '3×';
+  setTimeout(() => {
+    document.getElementById('streakNum').textContent = '8';
+    c3.style.background = '#8AAF8E';
+    c3.style.borderColor = '#8AAF8E';
+    c3.style.color = '#13110D';
+  }, 300);
+}
+
+// Smooth scroll for internal links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
