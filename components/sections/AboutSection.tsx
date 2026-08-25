@@ -38,7 +38,7 @@ const principles = [
   {
     number: "02",
     title: "Small team, full ownership.",
-    body: "A lean team means fast decisions, tight feedback loops, and code written by people who care deeply.",
+    body: "A lean team means fast decisions, tight feedback loops, and code written by the same people who show up to the calls — whether the project is ours or a client's.",
   },
   {
     number: "03",
@@ -95,9 +95,10 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-6 text-slate-400 text-lg max-w-2xl leading-relaxed"
           >
-            RS Digital Labs is a focused software studio. We identify problems
-            worth solving, build products that address them cleanly, and ship
-            without waiting for permission. No committee. No consensus theater.
+            RS Digital Labs is a focused product studio. We identify problems
+            worth solving, design and build products that address them
+            cleanly, and ship without waiting for permission — whether the
+            product is ours or yours. No committee. No consensus theater.
             Just execution.
           </motion.p>
         </div>

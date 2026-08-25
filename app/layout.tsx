@@ -20,14 +20,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RS Digital Labs — Building Apps That Make Life Easier",
+  metadataBase: new URL("https://rsdigitallabs.com"),
+  title: "RS Digital Labs — Product Design & Development Studio",
   description:
-    "RS Digital Labs creates practical software products that solve real-world problems. Meet CHIQ, Plannie, OLIVIA, and more.",
-  keywords: ["RS Digital Labs", "CHIQ", "Plannie", "OLIVIA", "software", "apps"],
+    "RS Digital Labs designs and builds premium digital products end to end — from first sketch to shipped app. See the proof in ARISE, CHIQ, Plannie, and OLIVIA, then bring us your project.",
+  keywords: [
+    "RS Digital Labs",
+    "product design studio",
+    "web design and development",
+    "app development studio",
+    "CHIQ",
+    "Plannie",
+    "OLIVIA",
+    "ARISE",
+  ],
   openGraph: {
-    title: "RS Digital Labs",
-    description: "Building Apps That Make Life Easier.",
+    title: "RS Digital Labs — Product Design & Development Studio",
+    description:
+      "We design, build, and ship premium digital products end to end. See the proof, then bring us your project.",
     type: "website",
+    url: "https://rsdigitallabs.com",
+    siteName: "RS Digital Labs",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RS Digital Labs — Product Design & Development Studio",
+    description:
+      "We design, build, and ship premium digital products end to end. See the proof, then bring us your project.",
   },
 };
 

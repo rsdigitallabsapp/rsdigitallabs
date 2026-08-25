@@ -4,9 +4,9 @@ import { motion, useScroll } from "framer-motion";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Apps", href: "#apps" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
-  { label: "Roadmap", href: "#timeline" },
   { label: "Contact", href: "#footer" },
 ];
 

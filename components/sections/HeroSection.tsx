@@ -4,7 +4,18 @@ import { motion } from "framer-motion";
 
 const HeroCanvas = dynamic(
   () => import("../three/HeroCanvas").then((m) => ({ default: m.HeroCanvas })),
-  { ssr: false, loading: () => null }
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="w-full h-full animate-pulse"
+        style={{
+          background:
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%)",
+        }}
+      />
+    ),
+  }
 );
 
 export function HeroSection() {
@@ -45,7 +56,7 @@ export function HeroSection() {
           <span
             className="text-xs font-mono tracking-[0.3em] text-violet-400 uppercase"
           >
-            RS Digital Labs
+            Product Design &amp; Development Studio
           </span>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-violet-500" />
         </motion.div>
@@ -57,9 +68,9 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight"
         >
-          <span className="text-white">Building Apps That</span>
+          <span className="text-white">We Design Products.</span>
           <br />
-          <span className="gradient-text">Make Life Easier.</span>
+          <span className="gradient-text">Then We Ship Them.</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -69,8 +80,9 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="mt-7 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
         >
-          RS Digital Labs creates practical software products that solve
-          real-world problems.
+          RS Digital Labs is a product studio for hire. We take ideas from
+          first sketch to a live website or app — and everything on this
+          page is proof, not a pitch deck.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -81,24 +93,24 @@ export function HeroSection() {
           className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="#apps"
+            href="#footer"
             className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-white overflow-hidden cursor-pointer transition-all duration-300"
             style={{
               background: "linear-gradient(135deg, #7C3AED, #A855F7)",
               boxShadow: "0 0 40px rgba(168,85,247,0.4), 0 0 80px rgba(168,85,247,0.15)",
             }}
           >
-            <span className="relative z-10">Explore Our Apps</span>
+            <span className="relative z-10">Start a Project</span>
             <svg className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
             <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
           </a>
           <a
-            href="#footer"
+            href="#work"
             className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-slate-200 glass cursor-pointer transition-all duration-300 hover:border-violet-500/40 hover:text-white"
           >
-            Contact Us
+            See What We've Built
           </a>
         </motion.div>
       </div>

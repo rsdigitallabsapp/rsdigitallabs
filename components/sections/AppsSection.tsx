@@ -13,7 +13,7 @@ const apps = [
     color: "#8AAF8E",
     glowColor: "rgba(138,175,142,0.3)",
     accentBg: "rgba(138,175,142,0.08)",
-    status: "Live",
+    status: "Coming Soon",
     href: "/arise",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
@@ -51,7 +51,7 @@ const apps = [
     color: "#22D3EE",
     glowColor: "rgba(34,211,238,0.3)",
     accentBg: "rgba(34,211,238,0.08)",
-    status: "Live",
+    status: "Coming Soon",
     href: "/plannie",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
@@ -139,7 +139,7 @@ function AppCard({
           ? `0 0 60px ${app.glowColor}, 0 0 120px ${app.glowColor.replace("0.3", "0.1")}, 0 20px 60px rgba(0,0,0,0.5)`
           : "0 4px 40px rgba(0,0,0,0.3)",
       }}
-      className="relative rounded-2xl overflow-hidden cursor-pointer group"
+      className={`relative rounded-2xl overflow-hidden group ${app.href ? "cursor-pointer" : "cursor-default"}`}
     >
       {/* Card background */}
       <div
@@ -201,15 +201,21 @@ function AppCard({
         </p>
 
         {/* CTA */}
-        <div
-          className="mt-8 flex items-center gap-2 text-sm font-semibold transition-all duration-300"
-          style={{ color: hovered ? app.color : "rgba(255,255,255,0.3)" }}
-        >
-          Learn more
-          <svg className={`w-4 h-4 transition-transform duration-300 ${hovered ? "translate-x-1" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </div>
+        {app.href ? (
+          <div
+            className="mt-8 flex items-center gap-2 text-sm font-semibold transition-all duration-300"
+            style={{ color: hovered ? app.color : "rgba(255,255,255,0.3)" }}
+          >
+            Learn more
+            <svg className={`w-4 h-4 transition-transform duration-300 ${hovered ? "translate-x-1" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </div>
+        ) : (
+          <div className="mt-8 text-sm font-medium text-white/20">
+            Page coming soon
+          </div>
+        )}
       </div>
     </motion.div>
   );
@@ -220,7 +226,7 @@ export function AppsSection() {
   const isInView = useInView(headingRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="apps" className="relative py-32 px-6">
+    <section id="work" className="relative py-32 px-6">
       {/* Background gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -241,7 +247,7 @@ export function AppsSection() {
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500" />
             <span className="text-xs font-mono tracking-[0.3em] text-cyan-400 uppercase">
-              Our Products
+              Proof of Work
             </span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500" />
           </motion.div>
@@ -251,8 +257,8 @@ export function AppsSection() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-white leading-tight"
           >
-            Apps built for{" "}
-            <span className="gradient-text">real people.</span>
+            This is what your project{" "}
+            <span className="gradient-text">looks like in our hands.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -260,8 +266,9 @@ export function AppsSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-5 text-slate-400 text-lg max-w-xl mx-auto"
           >
-            Every product we ship solves a genuine problem. No bloat, no
-            feature theater — just tools that work.
+            Every product below was designed, built, and shipped by RS
+            Digital Labs, end to end — no outsourcing, no bloat, no feature
+            theater.
           </motion.p>
         </div>
 
