@@ -5,6 +5,16 @@ import Link from "next/link";
 import { apps, AppCard } from "@/components/portfolio/apps-data";
 import { RestaurantConcept } from "@/components/portfolio/RestaurantConcept";
 import { MedicalConcept } from "@/components/portfolio/MedicalConcept";
+import { CursorImageTrail } from "@/components/portfolio/CursorImageTrail";
+
+const trailImages = [
+  "/trail/restaurant.png",
+  "/trail/arise.png",
+  "/trail/medical.png",
+  "/trail/chiq.png",
+  "/trail/landscaping.png",
+  "/trail/plannie.png",
+];
 
 const featuredApps = apps.filter((a) => a.id === "arise" || a.id === "chiq");
 
@@ -63,7 +73,7 @@ export function SelectedWorkSection() {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto">
+      <CursorImageTrail images={trailImages} className="max-w-6xl mx-auto">
         {/* Section heading */}
         <div ref={headingRef} className="text-center mb-20">
           <motion.div
@@ -130,7 +140,7 @@ export function SelectedWorkSection() {
             </svg>
           </Link>
         </div>
-      </div>
+      </CursorImageTrail>
     </section>
   );
 }
