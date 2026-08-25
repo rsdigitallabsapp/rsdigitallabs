@@ -1,67 +1,66 @@
 "use client";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useSyncExternalStore } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { apps, AppCard } from "@/components/portfolio/apps-data";
-import { RestaurantConcept } from "@/components/portfolio/RestaurantConcept";
-import { MedicalConcept } from "@/components/portfolio/MedicalConcept";
-import { CursorImageTrail } from "@/components/portfolio/CursorImageTrail";
+import { WorkStaticGrid } from "@/components/sections/WorkStaticGrid";
+import { WorkRevealCanvas } from "@/components/portfolio/WorkRevealCanvas";
+import { WorkRevealMobile } from "@/components/portfolio/WorkRevealMobile";
 
-const trailImages = [
-  "/trail/restaurant.png",
-  "/trail/arise.png",
-  "/trail/medical.png",
-  "/trail/chiq.png",
-  "/trail/landscaping.png",
-  "/trail/plannie.png",
-];
+type Mode = "static" | "canvas" | "mobile";
 
-const featuredApps = apps.filter((a) => a.id === "arise" || a.id === "chiq");
+const DESKTOP_POINTER_QUERY = "(pointer: fine) and (min-width: 1024px)";
 
-const concepts = [
-  {
-    id: "restaurant",
-    title: "Restaurant Concept",
-    blurb: "A warm, appetite-first homepage built to drive reservations.",
-    node: <RestaurantConcept />,
-  },
-  {
-    id: "medical",
-    title: "Medical/Dental Concept",
-    blurb: "A calm, trustworthy layout built to drive appointment requests.",
-    node: <MedicalConcept />,
-  },
-];
+function subscribeToPointerQuery(callback: () => void) {
+  const query = window.matchMedia(DESKTOP_POINTER_QUERY);
+  query.addEventListener("change", callback);
+  return () => query.removeEventListener("change", callback);
+}
 
-function ConceptCard({
-  title,
-  blurb,
-  node,
-  index,
-}: {
-  title: string;
-  blurb: string;
-  node: React.ReactNode;
-  index: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col items-center text-center"
-    >
-      <div className="mb-6 flex items-center justify-center">{node}</div>
-      <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{title}</h3>
-      <p className="text-slate-300 text-sm leading-relaxed max-w-xs">{blurb}</p>
-    </motion.div>
-  );
+function getPointerSnapshot() {
+  return window.matchMedia(DESKTOP_POINTER_QUERY).matches;
+}
+
+function getPointerServerSnapshot() {
+  return false;
+}
+
+// Never changes on its own — this subscription exists purely to give
+// useSyncExternalStore a hydration-safe way to report "has the client
+// finished mounting yet" (server/first-paint snapshot is false, client
+// snapshot is true), without a local effect+setState.
+function subscribeNever() {
+  return () => {};
+}
+function getHydratedSnapshot() {
+  return true;
+}
+function getHydratedServerSnapshot() {
+  return false;
 }
 
 export function SelectedWorkSection() {
   const headingRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(headingRef, { once: true, margin: "-100px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  // Reactive, hydration-safe reads of external browser state — no local
+  // effect/setState needed. The server snapshot (and first client paint,
+  // before either resolves) is always "static": real content, real links,
+  // no JS required. Once mounted, these upgrade the experience in place.
+  const isDesktopPointer = useSyncExternalStore(
+    subscribeToPointerQuery,
+    getPointerSnapshot,
+    getPointerServerSnapshot
+  );
+  const hydrated = useSyncExternalStore(subscribeNever, getHydratedSnapshot, getHydratedServerSnapshot);
+
+  const mode: Mode = !hydrated
+    ? "static"
+    : prefersReducedMotion
+      ? "static"
+      : isDesktopPointer
+        ? "canvas"
+        : "mobile";
 
   return (
     <section id="work" className="relative py-32 px-6">
@@ -73,7 +72,7 @@ export function SelectedWorkSection() {
         }}
       />
 
-      <CursorImageTrail images={trailImages} className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section heading */}
         <div ref={headingRef} className="text-center mb-20">
           <motion.div
@@ -109,15 +108,9 @@ export function SelectedWorkSection() {
           </motion.p>
         </div>
 
-        {/* Mixed grid: 2 website concepts + 2 app products */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {concepts.map((c, i) => (
-            <ConceptCard key={c.id} title={c.title} blurb={c.blurb} node={c.node} index={i} />
-          ))}
-          {featuredApps.map((app, i) => (
-            <AppCard key={app.id} app={app} index={i + concepts.length} variant="bare" />
-          ))}
-        </div>
+        {mode === "static" && <WorkStaticGrid />}
+        {mode === "canvas" && <WorkRevealCanvas />}
+        {mode === "mobile" && <WorkRevealMobile />}
 
         {/* Path links */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -140,7 +133,7 @@ export function SelectedWorkSection() {
             </svg>
           </Link>
         </div>
-      </CursorImageTrail>
+      </div>
     </section>
   );
 }

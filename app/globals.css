@@ -46,6 +46,13 @@ body {
   border-radius: 2px;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(24px);
