@@ -265,7 +265,7 @@ export default function PlannieDeleteAccountPage() {
           </div>
         </section>
       </main>
-      <FooterSection />
+      <FooterSection formVariant="none" />
     </>
   );
 }

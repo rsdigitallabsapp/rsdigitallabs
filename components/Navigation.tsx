@@ -5,7 +5,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
+  { label: "Website", href: "/website" },
+  { label: "App", href: "/app" },
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#footer" },
@@ -17,7 +18,14 @@ export function Navigation() {
   const { scrollY } = useScroll();
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const toHome = (hash: string) => (isHome ? hash : `/${hash}`);
+  // Hash links are homepage-only sections, so from any other page they need
+  // a leading "/" to resolve there first. Already-absolute paths (e.g.
+  // "/website") must pass through unchanged, or a non-homepage page would
+  // render them as "//website".
+  const toHome = (href: string) => {
+    if (!href.startsWith("#")) return href;
+    return isHome ? href : `/${href}`;
+  };
 
   useEffect(() => {
     const unsub = scrollY.on("change", (v) => setScrolled(v > 60));

@@ -811,7 +811,7 @@ export default function ArisePage() {
         <div className="section-divider" />
         <FAQ />
         <DownloadCTA />
-        <FooterSection />
+        <FooterSection formVariant="app" />
       </main>
     </>
   );

@@ -2,8 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { CursorGlow } from "@/components/CursorGlow";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
-import { AppsSection } from "@/components/sections/AppsSection";
+import { SelectedWorkSection } from "@/components/sections/SelectedWorkSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { TimelineSection } from "@/components/sections/TimelineSection";
 import { FooterSection } from "@/components/sections/FooterSection";
@@ -17,14 +16,12 @@ export default function Home() {
       <main>
         <HeroSection />
         <div className="section-divider" />
-        <ServicesSection />
-        <div className="section-divider" />
-        <AppsSection />
-        <div className="section-divider" />
-        <AboutSection />
+        <SelectedWorkSection />
         <div className="section-divider" />
         <TimelineSection />
-        <FooterSection />
+        <div className="section-divider" />
+        <AboutSection />
+        <FooterSection formVariant="general" />
       </main>
     </>
   );

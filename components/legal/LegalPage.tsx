@@ -203,7 +203,7 @@ export function LegalPage({
           </div>
         </section>
       </main>
-      <FooterSection />
+      <FooterSection formVariant="none" />
     </>
   );
 }

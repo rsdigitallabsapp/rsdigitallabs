@@ -3,29 +3,39 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { inputClass, labelClass, isValidEmail } from "./form-styles";
 
-const PROJECT_TYPES = ["New website", "Redesign"] as const;
+const NEED_OPTIONS = ["Mobile app", "Web app", "Portal or marketplace", "Custom business tool"];
+const STAGE_OPTIONS = [
+  "Just an idea",
+  "Have a plan, no design yet",
+  "Have designs, need it built",
+  "Have a product, need to improve it",
+];
+const BUDGET_OPTIONS = ["Under $5k", "$5k – $15k", "$15k – $40k", "$40k+", "Not sure yet"];
+const TIMEFRAME_OPTIONS = ["ASAP", "1–3 months", "3–6 months", "No fixed date"];
 
 type FormState = {
-  projectType: (typeof PROJECT_TYPES)[number] | "";
-  currentUrl: string;
-  business: string;
   name: string;
   email: string;
-  phone: string;
-  message: string;
+  company: string;
+  need: string;
+  stage: string;
+  budget: string;
+  timeframe: string;
+  description: string;
 };
 
 const initialState: FormState = {
-  projectType: "",
-  currentUrl: "",
-  business: "",
   name: "",
   email: "",
-  phone: "",
-  message: "",
+  company: "",
+  need: "",
+  stage: "",
+  budget: "",
+  timeframe: "",
+  description: "",
 };
 
-export function InquiryForm() {
+export function AppInquiryForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -34,16 +44,16 @@ export function InquiryForm() {
   const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
 
   const update = (field: keyof FormState) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm((f) => ({ ...f, [field]: e.target.value }));
   };
 
   const validate = () => {
     const next: Partial<Record<keyof FormState, string>> = {};
-    if (!form.business.trim()) next.business = "Tell us the business name.";
     if (!form.name.trim()) next.name = "Tell us your name.";
     if (!isValidEmail(form.email)) next.email = "Enter a valid email.";
+    if (!form.description.trim()) next.description = "A couple sentences is enough.";
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -62,7 +72,7 @@ export function InquiryForm() {
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...form, inquiryType: "website", sourcePage: pathname }),
+        body: JSON.stringify({ ...form, inquiryType: "app", sourcePage: pathname }),
       });
       if (!res.ok) throw new Error("Submission failed");
       setStatus("success");
@@ -85,61 +95,13 @@ export function InquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-8 text-left" noValidate>
-      <input type="hidden" name="inquiryType" value="website" />
+      <input type="hidden" name="inquiryType" value="app" />
       <input type="hidden" name="sourcePage" value={pathname} />
-      <div>
-        <label className={labelClass}>New website or redesign?</label>
-        <div className="flex gap-3">
-          {PROJECT_TYPES.map((type) => (
-            <button
-              key={type}
-              type="button"
-              onClick={() => setForm((f) => ({ ...f, projectType: type }))}
-              className="px-4 py-2.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 border"
-              style={
-                form.projectType === type
-                  ? { background: "rgba(168,85,247,0.15)", borderColor: "rgba(168,85,247,0.5)", color: "#fff" }
-                  : { background: "transparent", borderColor: "rgba(255,255,255,0.1)", color: "#94A3B8" }
-              }
-            >
-              {type}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {form.projectType === "Redesign" && (
-        <div className="mt-5">
-          <label className={labelClass} htmlFor="currentUrl">Current website URL</label>
-          <input
-            id="currentUrl"
-            type="text"
-            value={form.currentUrl}
-            onChange={update("currentUrl")}
-            className={inputClass}
-            placeholder="yourbusiness.com"
-          />
-        </div>
-      )}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className={labelClass} htmlFor="business">Business name</label>
+          <label className={labelClass} htmlFor="app-name">Name</label>
           <input
-            id="business"
-            type="text"
-            value={form.business}
-            onChange={update("business")}
-            className={inputClass}
-            placeholder="Your business"
-          />
-          {errors.business && <p className="text-xs text-rose-400 mt-1.5">{errors.business}</p>}
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="name">Contact name</label>
-          <input
-            id="name"
+            id="app-name"
             type="text"
             value={form.name}
             onChange={update("name")}
@@ -150,9 +112,9 @@ export function InquiryForm() {
         </div>
 
         <div>
-          <label className={labelClass} htmlFor="email">Email</label>
+          <label className={labelClass} htmlFor="app-email">Email</label>
           <input
-            id="email"
+            id="app-email"
             type="email"
             value={form.email}
             onChange={update("email")}
@@ -162,27 +124,68 @@ export function InquiryForm() {
           {errors.email && <p className="text-xs text-rose-400 mt-1.5">{errors.email}</p>}
         </div>
 
-        <div>
-          <label className={labelClass} htmlFor="phone">Phone</label>
+        <div className="sm:col-span-2">
+          <label className={labelClass} htmlFor="app-company">Company</label>
           <input
-            id="phone"
-            type="tel"
-            value={form.phone}
-            onChange={update("phone")}
+            id="app-company"
+            type="text"
+            value={form.company}
+            onChange={update("company")}
             className={inputClass}
             placeholder="Optional"
           />
         </div>
 
+        <div>
+          <label className={labelClass} htmlFor="app-need">What do you need?</label>
+          <select id="app-need" value={form.need} onChange={update("need")} className={inputClass}>
+            <option value="">Select one</option>
+            {NEED_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className={labelClass} htmlFor="app-stage">Current stage</label>
+          <select id="app-stage" value={form.stage} onChange={update("stage")} className={inputClass}>
+            <option value="">Select one</option>
+            {STAGE_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className={labelClass} htmlFor="app-budget">Approximate budget</label>
+          <select id="app-budget" value={form.budget} onChange={update("budget")} className={inputClass}>
+            <option value="">Select one</option>
+            {BUDGET_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className={labelClass} htmlFor="app-timeframe">Desired timeframe</label>
+          <select id="app-timeframe" value={form.timeframe} onChange={update("timeframe")} className={inputClass}>
+            <option value="">Select one</option>
+            {TIMEFRAME_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+
         <div className="sm:col-span-2">
-          <label className={labelClass} htmlFor="message">Message</label>
+          <label className={labelClass} htmlFor="app-description">What are you trying to build?</label>
           <textarea
-            id="message"
-            value={form.message}
-            onChange={update("message")}
-            className={`${inputClass} min-h-[90px] resize-none`}
-            placeholder="Optional — anything else we should know?"
+            id="app-description"
+            value={form.description}
+            onChange={update("description")}
+            className={`${inputClass} min-h-[110px] resize-none`}
+            placeholder="A couple sentences on the project is plenty to start."
           />
+          {errors.description && <p className="text-xs text-rose-400 mt-1.5">{errors.description}</p>}
         </div>
       </div>
 

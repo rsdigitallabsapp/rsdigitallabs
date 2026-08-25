@@ -720,7 +720,7 @@ export default function PlanniePage() {
         <Premium />
         <div className="section-divider" />
         <FAQ />
-        <FooterSection />
+        <FooterSection formVariant="app" />
       </main>
     </>
   );

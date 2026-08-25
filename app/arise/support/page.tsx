@@ -389,7 +389,7 @@ export default function AriseSupportPage() {
           </div>
         </section>
       </main>
-      <FooterSection />
+      <FooterSection formVariant="none" />
     </>
   );
 }
