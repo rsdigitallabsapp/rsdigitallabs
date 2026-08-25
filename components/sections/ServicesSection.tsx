@@ -131,7 +131,8 @@ export function ServicesSection() {
           className="glass rounded-2xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-5"
         >
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            No templates. No outsourcing.{" "}
+            No cookie-cutter websites. Every project is adapted to the
+            business, audience, and goals.{" "}
             <span className="text-white font-medium">
               The team that builds our own apps builds yours.
             </span>

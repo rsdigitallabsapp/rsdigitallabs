@@ -1,57 +1,26 @@
 "use client";
 import { useState } from "react";
 
-const NEED_OPTIONS = [
-  "Website",
-  "Ecommerce",
-  "Web app",
-  "Mobile app",
-  "Branding",
-  "Ongoing support",
-];
-
-const STAGE_OPTIONS = [
-  "Just an idea",
-  "Have a plan, no design yet",
-  "Have designs, need it built",
-  "Have a product, need to improve it",
-];
-
-const BUDGET_OPTIONS = [
-  "Under $5k",
-  "$5k – $15k",
-  "$15k – $40k",
-  "$40k+",
-  "Not sure yet",
-];
-
-const TIMEFRAME_OPTIONS = [
-  "ASAP",
-  "1–3 months",
-  "3–6 months",
-  "No fixed date",
-];
+const PROJECT_TYPES = ["New website", "Redesign"] as const;
 
 type FormState = {
+  projectType: (typeof PROJECT_TYPES)[number] | "";
+  currentUrl: string;
+  business: string;
   name: string;
   email: string;
-  company: string;
-  need: string;
-  stage: string;
-  budget: string;
-  timeframe: string;
-  description: string;
+  phone: string;
+  message: string;
 };
 
 const initialState: FormState = {
+  projectType: "",
+  currentUrl: "",
+  business: "",
   name: "",
   email: "",
-  company: "",
-  need: "",
-  stage: "",
-  budget: "",
-  timeframe: "",
-  description: "",
+  phone: "",
+  message: "",
 };
 
 const inputClass =
@@ -71,16 +40,16 @@ export function InquiryForm() {
   const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
 
   const update = (field: keyof FormState) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm((f) => ({ ...f, [field]: e.target.value }));
   };
 
   const validate = () => {
     const next: Partial<Record<keyof FormState, string>> = {};
+    if (!form.business.trim()) next.business = "Tell us the business name.";
     if (!form.name.trim()) next.name = "Tell us your name.";
     if (!isValidEmail(form.email)) next.email = "Enter a valid email.";
-    if (!form.description.trim()) next.description = "A couple sentences is enough.";
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -122,9 +91,57 @@ export function InquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 sm:p-8 text-left" noValidate>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label className={labelClass}>New website or redesign?</label>
+        <div className="flex gap-3">
+          {PROJECT_TYPES.map((type) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setForm((f) => ({ ...f, projectType: type }))}
+              className="px-4 py-2.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 border"
+              style={
+                form.projectType === type
+                  ? { background: "rgba(168,85,247,0.15)", borderColor: "rgba(168,85,247,0.5)", color: "#fff" }
+                  : { background: "transparent", borderColor: "rgba(255,255,255,0.1)", color: "#94A3B8" }
+              }
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {form.projectType === "Redesign" && (
+        <div className="mt-5">
+          <label className={labelClass} htmlFor="currentUrl">Current website URL</label>
+          <input
+            id="currentUrl"
+            type="text"
+            value={form.currentUrl}
+            onChange={update("currentUrl")}
+            className={inputClass}
+            placeholder="yourbusiness.com"
+          />
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5">
         <div>
-          <label className={labelClass} htmlFor="name">Name</label>
+          <label className={labelClass} htmlFor="business">Business name</label>
+          <input
+            id="business"
+            type="text"
+            value={form.business}
+            onChange={update("business")}
+            className={inputClass}
+            placeholder="Your business"
+          />
+          {errors.business && <p className="text-xs text-rose-400 mt-1.5">{errors.business}</p>}
+        </div>
+
+        <div>
+          <label className={labelClass} htmlFor="name">Contact name</label>
           <input
             id="name"
             type="text"
@@ -149,68 +166,27 @@ export function InquiryForm() {
           {errors.email && <p className="text-xs text-rose-400 mt-1.5">{errors.email}</p>}
         </div>
 
-        <div className="sm:col-span-2">
-          <label className={labelClass} htmlFor="company">Business or company</label>
+        <div>
+          <label className={labelClass} htmlFor="phone">Phone</label>
           <input
-            id="company"
-            type="text"
-            value={form.company}
-            onChange={update("company")}
+            id="phone"
+            type="tel"
+            value={form.phone}
+            onChange={update("phone")}
             className={inputClass}
             placeholder="Optional"
           />
         </div>
 
-        <div>
-          <label className={labelClass} htmlFor="need">What do you need?</label>
-          <select id="need" value={form.need} onChange={update("need")} className={inputClass}>
-            <option value="">Select one</option>
-            {NEED_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="stage">Current stage</label>
-          <select id="stage" value={form.stage} onChange={update("stage")} className={inputClass}>
-            <option value="">Select one</option>
-            {STAGE_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="budget">Approximate budget</label>
-          <select id="budget" value={form.budget} onChange={update("budget")} className={inputClass}>
-            <option value="">Select one</option>
-            {BUDGET_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="timeframe">Desired launch timeframe</label>
-          <select id="timeframe" value={form.timeframe} onChange={update("timeframe")} className={inputClass}>
-            <option value="">Select one</option>
-            {TIMEFRAME_OPTIONS.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
-          </select>
-        </div>
-
         <div className="sm:col-span-2">
-          <label className={labelClass} htmlFor="description">What are you trying to build?</label>
+          <label className={labelClass} htmlFor="message">Message</label>
           <textarea
-            id="description"
-            value={form.description}
-            onChange={update("description")}
-            className={`${inputClass} min-h-[110px] resize-none`}
-            placeholder="A couple sentences on the project is plenty to start."
+            id="message"
+            value={form.message}
+            onChange={update("message")}
+            className={`${inputClass} min-h-[90px] resize-none`}
+            placeholder="Optional — anything else we should know?"
           />
-          {errors.description && <p className="text-xs text-rose-400 mt-1.5">{errors.description}</p>}
         </div>
       </div>
 

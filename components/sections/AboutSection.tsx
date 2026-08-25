@@ -1,32 +1,11 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-function CountUp({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (!isInView) return;
-    const start = Date.now();
-    const timer = setInterval(() => {
-      const elapsed = Date.now() - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress >= 1) clearInterval(timer);
-    }, 16);
-    return () => clearInterval(timer);
-  }, [isInView, target, duration]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
-}
-
-const stats = [
-  { value: 3, suffix: "", label: "Apps in the Wild", desc: "Real products used by real people." },
-  { value: 100, suffix: "%", label: "Founder-Built", desc: "Everything we ship, we built ourselves." },
-  { value: 0, suffix: " BS", label: "Zero", desc: "No VC theatre. No vanity metrics. Just work." },
+const commitments = [
+  { title: "Direct collaboration", desc: "Work with the studio responsible for your project." },
+  { title: "End-to-end delivery", desc: "Strategy, design, development, and launch under one roof." },
+  { title: "Built for the long term", desc: "Continued support after your website or app launches." },
 ];
 
 const principles = [
@@ -103,9 +82,9 @@ export function AboutSection() {
           </motion.p>
         </div>
 
-        {/* Stats row */}
+        {/* Commitments row */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-24">
-          {stats.map((s, i) => (
+          {commitments.map((c, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
@@ -114,11 +93,8 @@ export function AboutSection() {
               transition={{ duration: 0.7, delay: i * 0.1 }}
               className="glass rounded-2xl p-8"
             >
-              <div className="text-4xl font-bold text-white mb-1">
-                <CountUp target={s.value} suffix={s.suffix} />
-              </div>
-              <div className="text-violet-400 font-semibold mb-2 text-sm tracking-wide">{s.label}</div>
-              <div className="text-slate-300 text-sm">{s.desc}</div>
+              <div className="text-xl font-bold text-white mb-2">{c.title}</div>
+              <div className="text-slate-300 text-sm leading-relaxed">{c.desc}</div>
             </motion.div>
           ))}
         </div>

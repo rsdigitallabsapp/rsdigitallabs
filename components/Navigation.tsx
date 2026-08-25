@@ -56,7 +56,7 @@ export function Navigation() {
               alt="RS Digital Labs"
               width={171}
               height={100}
-              className="w-[92px] sm:w-[160px] h-auto transition-all duration-300 group-hover:opacity-80"
+              className="w-[92px] sm:w-[120px] h-auto transition-all duration-300 group-hover:opacity-80"
               priority
             />
           </a>
