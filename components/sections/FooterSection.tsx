@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const links = {
   Work: [
     { label: "ARISE", href: "/arise" },
-    { label: "CHIQ", href: "#work" },
+    { label: "CHIQ", href: "https://chiqdating.com" },
     { label: "Plannie", href: "/plannie" },
     { label: "OLIVIA", href: "#work" },
   ],
@@ -112,6 +112,8 @@ export function FooterSection() {
                   <li key={item.label}>
                     <a
                       href={resolveHref(item.href)}
+                      target={item.href.startsWith("http") ? "_blank" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="text-slate-500 hover:text-slate-200 text-sm transition-colors duration-200 cursor-pointer"
                     >
                       {item.label}

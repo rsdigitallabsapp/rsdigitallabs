@@ -33,6 +33,7 @@ const apps = [
     glowColor: "rgba(168,85,247,0.3)",
     accentBg: "rgba(168,85,247,0.08)",
     status: "Live",
+    href: "https://chiqdating.com",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
         <circle cx="20" cy="20" r="18" stroke="#A855F7" strokeWidth="1.5" />
@@ -131,7 +132,14 @@ function AppCard({
         setHovered(false);
         setTilt({ x: 0, y: 0 });
       }}
-      onClick={() => app.href && router.push(app.href)}
+      onClick={() => {
+        if (!app.href) return;
+        if (app.href.startsWith("http")) {
+          window.open(app.href, "_blank", "noopener,noreferrer");
+        } else {
+          router.push(app.href);
+        }
+      }}
       style={{
         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${hovered ? "10px" : "0px"})`,
         transition: hovered ? "transform 0.1s linear, box-shadow 0.3s" : "transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s",
