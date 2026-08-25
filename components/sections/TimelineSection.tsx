@@ -2,63 +2,73 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const milestones = [
+const steps = [
   {
-    year: "2024",
-    quarter: "Q1",
-    name: "CHIQ",
-    label: "First Ship",
-    description: "An AI assistant built because the existing options were too complicated, too expensive, or too generic. CHIQ was built to be straightforward and genuinely useful.",
+    name: "Discover",
+    label: "Understand the problem",
+    description: "We start by listening — your business, your customers, what's working, and what isn't. No proposal gets written before we understand the problem.",
     color: "#A855F7",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+        <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M21 21l-4.3-4.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    year: "2024",
-    quarter: "Q3",
-    name: "Plannie",
-    label: "Task Intelligence",
-    description: "Planning tools that existed were either too simple or too complex. Plannie hits the middle: smart enough to help, simple enough to use every day.",
+    name: "Define",
+    label: "Scope the right build",
+    description: "We turn what we learned into a concrete plan — what gets built, what it costs, and when it ships. No guessing, no scope creep later.",
     color: "#22D3EE",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
+        <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="8" y1="10" x2="16" y2="10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="8" y1="13" x2="13" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    year: "2025",
-    quarter: "Q1",
-    name: "OLIVIA",
-    label: "Personal Assistant",
-    description: "A true personal companion that understands your context, handles the routine, and surfaces what actually needs your attention. Private by design.",
+    name: "Design",
+    label: "Make it look right",
+    description: "Real screens, not mood boards. We design the actual product so you can see and react to it before a single line of code ships.",
     color: "#60A5FA",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
-        <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M15 4l5 5-11 11H4v-5L15 4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     ),
   },
   {
-    year: "2025+",
-    quarter: "∞",
-    name: "Marketplace",
-    label: "What's Next",
-    description: "The lab is always running. New marketplace apps and tools are in active development. Problems to solve, products to ship — the work continues.",
+    name: "Build",
+    label: "Make it work",
+    description: "We write the code — clean, tested, and built to last past launch day, not just to demo well once.",
     color: "#818CF8",
-    future: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
-        <path d="M12 4v4M12 16v4M4 12h4M16 12h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 1.5" />
+        <path d="M8 9l-4 4 4 4M16 9l4 4-4 4M13 5l-2 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "Launch",
+    label: "Ship it for real",
+    description: "We handle the unglamorous parts — deployment, app-store submission, and the last-mile details most agencies leave for you to figure out.",
+    color: "#A855F7",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
+        <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7l3-7z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    name: "Improve",
+    label: "Keep it working",
+    description: "Launch is the start, not the finish. We stick around to iterate on real usage, real feedback, and real numbers.",
+    color: "#22D3EE",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
+        <path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M18 3v4h-4M6 21v-4h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -69,7 +79,7 @@ export function TimelineSection() {
   const isInView = useInView(headingRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="timeline" className="relative py-32 px-6 overflow-hidden">
+    <section id="process" className="relative py-32 px-6 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -89,7 +99,7 @@ export function TimelineSection() {
           >
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-indigo-500" />
             <span className="text-xs font-mono tracking-[0.3em] text-indigo-400 uppercase">
-              Roadmap
+              How We Work
             </span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-indigo-500" />
           </motion.div>
@@ -99,8 +109,8 @@ export function TimelineSection() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold text-white leading-tight"
           >
-            From idea to{" "}
-            <span className="gradient-text">shipped product.</span>
+            From first sketch{" "}
+            <span className="gradient-text">to launch day.</span>
           </motion.h2>
         </div>
 
@@ -115,7 +125,7 @@ export function TimelineSection() {
           />
 
           <div className="space-y-16">
-            {milestones.map((m, i) => {
+            {steps.map((m, i) => {
               const isRight = i % 2 === 1;
               return (
                 <motion.div
@@ -148,27 +158,15 @@ export function TimelineSection() {
                         >
                           {m.label}
                         </div>
-                        {m.future && (
-                          <div
-                            className="ml-auto text-xs px-2 py-0.5 rounded-full font-mono"
-                            style={{
-                              color: m.color,
-                              background: m.color + "15",
-                              border: `1px solid ${m.color}30`,
-                            }}
-                          >
-                            upcoming
-                          </div>
-                        )}
                       </div>
 
                       <h3
                         className="text-2xl font-bold mb-2 transition-colors duration-300 group-hover:text-white"
-                        style={{ color: m.future ? "rgba(255,255,255,0.5)" : "#F1F5F9" }}
+                        style={{ color: "#F1F5F9" }}
                       >
                         {m.name}
                       </h3>
-                      <p className="text-slate-500 text-sm leading-relaxed">{m.description}</p>
+                      <p className="text-slate-300 text-sm leading-relaxed">{m.description}</p>
                     </div>
                   </div>
 

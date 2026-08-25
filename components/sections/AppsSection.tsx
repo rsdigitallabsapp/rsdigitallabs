@@ -2,6 +2,9 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { ArisePhoneMockup } from "@/components/portfolio/ArisePhoneMockup";
+import { PlanniePhoneMockup } from "@/components/portfolio/PlanniePhoneMockup";
 
 const apps = [
   {
@@ -15,6 +18,11 @@ const apps = [
     accentBg: "rgba(138,175,142,0.08)",
     status: "Coming Soon",
     href: "/arise",
+    preview: (
+      <div className="scale-[0.46] origin-top">
+        <ArisePhoneMockup />
+      </div>
+    ),
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
         <circle cx="20" cy="20" r="10" stroke="#8AAF8E" strokeWidth="1.5" />
@@ -26,14 +34,25 @@ const apps = [
   {
     id: "chiq",
     name: "CHIQ",
-    tagline: "AI-powered conversations, elevated.",
+    tagline: "Dating, intentionally.",
     description:
-      "A next-generation AI chat experience designed for clarity, speed, and genuine usefulness. Not a toy — a tool.",
+      "A premium dating app for Gen X LGBTQ+ women seeking meaningful relationships and intentional connections — not another swipe-and-forget feed.",
     color: "#A855F7",
     glowColor: "rgba(168,85,247,0.3)",
     accentBg: "rgba(168,85,247,0.08)",
-    status: "Live",
+    status: "Coming Soon",
     href: "https://chiqdating.com",
+    preview: (
+      <div className="relative w-full h-full">
+        <Image
+          src="/chiq-preview.png"
+          alt="CHIQ interface preview"
+          fill
+          sizes="400px"
+          className="object-contain"
+        />
+      </div>
+    ),
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
         <circle cx="20" cy="20" r="18" stroke="#A855F7" strokeWidth="1.5" />
@@ -54,6 +73,11 @@ const apps = [
     accentBg: "rgba(34,211,238,0.08)",
     status: "Coming Soon",
     href: "/plannie",
+    preview: (
+      <div className="scale-[0.52] origin-top">
+        <PlanniePhoneMockup />
+      </div>
+    ),
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
         <rect x="8" y="8" width="24" height="24" rx="4" stroke="#22D3EE" strokeWidth="1.5" />
@@ -72,7 +96,7 @@ const apps = [
     color: "#60A5FA",
     glowColor: "rgba(96,165,250,0.3)",
     accentBg: "rgba(96,165,250,0.08)",
-    status: "Live",
+    status: "In Development",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
         <circle cx="20" cy="15" r="6" stroke="#60A5FA" strokeWidth="1.5" />
@@ -190,6 +214,25 @@ function AppCard({
           </div>
         </div>
 
+        {/* Product interface preview */}
+        {app.preview && (
+          <div className="mb-6">
+            <div
+              className="relative h-56 rounded-xl overflow-hidden flex items-start justify-center"
+              style={{ background: "rgba(0,0,0,0.25)" }}
+            >
+              {app.preview}
+              <div
+                className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
+                style={{ background: "linear-gradient(to bottom, transparent, rgba(2,2,8,0.5))" }}
+              />
+            </div>
+            <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mt-2 text-center">
+              Product interface preview
+            </p>
+          </div>
+        )}
+
         {/* Name */}
         <h3
           className="text-3xl font-bold mb-3 tracking-tight transition-all duration-300"
@@ -204,7 +247,7 @@ function AppCard({
         </p>
 
         {/* Description */}
-        <p className="text-slate-500 text-sm leading-relaxed">
+        <p className="text-slate-300 text-sm leading-relaxed">
           {app.description}
         </p>
 
@@ -272,11 +315,11 @@ export function AppsSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-5 text-slate-400 text-lg max-w-xl mx-auto"
+            className="mt-5 text-slate-300 text-lg max-w-xl mx-auto"
           >
-            Every product below was designed, built, and shipped by RS
-            Digital Labs, end to end — no outsourcing, no bloat, no feature
-            theater.
+            Every product below was designed and built by RS Digital Labs,
+            end to end — from first sketch to app-store-ready, no
+            outsourcing, no bloat, no feature theater.
           </motion.p>
         </div>
 

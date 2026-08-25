@@ -8,10 +8,10 @@ const HeroCanvas = dynamic(
     ssr: false,
     loading: () => (
       <div
-        className="w-full h-full animate-pulse"
+        className="w-full h-full"
         style={{
           background:
-            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%)",
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(124,58,237,0.08) 0%, transparent 70%)",
         }}
       />
     ),
@@ -35,6 +35,15 @@ export function HeroSection() {
         }}
       />
 
+      {/* Legibility scrim — keeps the text column readable regardless of what the scene is doing */}
+      <div
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 40% 32% at 50% 40%, rgba(2,2,8,0.5) 0%, transparent 75%)",
+        }}
+      />
+
       {/* Bottom fade */}
       <div
         className="absolute bottom-0 left-0 right-0 h-48 z-[2] pointer-events-none"
@@ -43,15 +52,11 @@ export function HeroSection() {
         }}
       />
 
-      {/* Text content */}
+      {/* Text content — rendered plainly (no entrance animation) so it's visible
+          immediately, before the 3D scene or any JS has had a chance to run. */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         {/* Eyebrow label */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center justify-center gap-3 mb-8"
-        >
+        <div className="flex items-center justify-center gap-3 mb-8">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-violet-500" />
           <span
             className="text-xs font-mono tracking-[0.3em] text-violet-400 uppercase"
@@ -59,39 +64,25 @@ export function HeroSection() {
             Product Design &amp; Development Studio
           </span>
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-violet-500" />
-        </motion.div>
+        </div>
 
         {/* Main headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight"
-        >
-          <span className="text-white">We Design Products.</span>
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight">
+          <span className="text-white">We design and build websites, apps,</span>
           <br />
-          <span className="gradient-text">Then We Ship Them.</span>
-        </motion.h1>
+          <span className="gradient-text">and digital products that work.</span>
+        </h1>
 
         {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-7 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
-        >
-          RS Digital Labs is a product studio for hire. We take ideas from
-          first sketch to a live website or app — and everything on this
-          page is proof, not a pitch deck.
-        </motion.p>
+        <p className="mt-7 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          RS Digital Labs is a product studio for local and small
+          businesses. We take your idea from first sketch to a live
+          website or app — and everything on this page is proof, not a
+          pitch deck.
+        </p>
 
         {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
-        >
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#footer"
             className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-white overflow-hidden cursor-pointer transition-all duration-300"
@@ -112,17 +103,17 @@ export function HeroSection() {
           >
             See What We've Built
           </a>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.2, duration: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
       >
-        <span className="text-[10px] font-mono tracking-[0.2em] text-slate-600 uppercase">
+        <span className="text-[10px] font-mono tracking-[0.2em] text-slate-400 uppercase">
           Scroll
         </span>
         <div className="w-5 h-9 rounded-full border border-violet-700/40 flex items-start justify-center pt-1.5">

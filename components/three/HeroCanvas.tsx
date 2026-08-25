@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
@@ -46,6 +46,7 @@ function Scene({ mouseRef }: { mouseRef: React.RefObject<{ x: number; y: number 
 
 export function HeroCanvas() {
   const mouseRef = useRef({ x: 0, y: 0 });
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -55,6 +56,26 @@ export function HeroCanvas() {
     window.addEventListener("mousemove", onMove, { passive: true });
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
+
+  useEffect(() => {
+    // Defer the actual WebGL context/shader setup by a couple of paint frames,
+    // so it doesn't compete with page hydration for the main thread on slow
+    // mobile devices — text must be visible and interactive first, the scene
+    // can catch up right after. Double-rAF (not requestIdleCallback, which
+    // isn't supported in Safari and can stall indefinitely under load) keeps
+    // this bounded and reliable everywhere.
+    let raf1 = 0;
+    let raf2 = 0;
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => setReady(true));
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+    };
+  }, []);
+
+  if (!ready) return null;
 
   return (
     <Canvas

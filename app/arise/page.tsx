@@ -8,92 +8,12 @@ import { Navigation } from "@/components/Navigation";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { CursorGlow } from "@/components/CursorGlow";
 import { FooterSection } from "@/components/sections/FooterSection";
+import { ArisePhoneMockup as PhoneMockup } from "@/components/portfolio/ArisePhoneMockup";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const SAGE = "#8AAF8E";
 const SAGE_LIGHT = "#AECAAE";
 const TERRA = "#C4714E";
-
-// ─── Phone Mockup ─────────────────────────────────────────────────────────────
-function PhoneMockup() {
-  const [count, setCount] = useState(2);
-  const [streak, setStreak] = useState(7);
-
-  const speak = () => {
-    if (count >= 3) return;
-    const next = count + 1;
-    setCount(next);
-    if (next === 3) setTimeout(() => setStreak((s) => s + 1), 350);
-  };
-
-  return (
-    <div className="relative w-[260px] h-[520px]">
-      <div
-        className="absolute inset-0 rounded-[40px] overflow-hidden"
-        style={{
-          background: "linear-gradient(180deg, #14120d 0%, #1c1912 100%)",
-          border: "1.5px solid rgba(138,175,142,0.18)",
-          boxShadow: `0 0 60px rgba(138,175,142,0.15), 0 40px 90px rgba(0,0,0,0.6)`,
-        }}
-      >
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#0d0b08] rounded-full z-10" />
-
-        <div className="flex flex-col items-center justify-center h-full px-8 pb-8 pt-14">
-          <div className="text-center mb-7">
-            <div
-              className="text-5xl font-bold leading-none"
-              style={{ fontFamily: "var(--font-space-grotesk)", color: SAGE }}
-            >
-              {streak}
-            </div>
-            <div className="text-[10px] text-white/40 tracking-widest uppercase mt-1">
-              Day streak
-            </div>
-          </div>
-          <div className="text-center mb-9 px-1">
-            <p className="text-sm text-white/85 italic leading-relaxed">
-              "I am worthy of everything I work toward."
-            </p>
-          </div>
-          <div className="flex gap-4 mb-9">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="w-12 h-12 rounded-full flex items-center justify-center text-[11px] font-medium transition-all duration-300"
-                style={{
-                  border: `1.5px solid ${i < count ? SAGE : "rgba(138,175,142,0.3)"}`,
-                  background: i < count ? SAGE : "transparent",
-                  color: i < count ? "#13110D" : SAGE,
-                }}
-              >
-                {i + 1}×
-              </div>
-            ))}
-          </div>
-          <button
-            onClick={speak}
-            className="w-full rounded-2xl py-3.5 text-sm font-semibold cursor-pointer transition-transform duration-150 active:scale-95"
-            style={{ background: SAGE, color: "#13110D" }}
-          >
-            Speak aloud
-          </button>
-        </div>
-      </div>
-
-      <div
-        className="absolute -top-5 -right-5 w-20 h-20 rounded-2xl flex flex-col items-center justify-center gap-1 glass"
-        style={{ boxShadow: "0 20px 48px rgba(0,0,0,0.4)" }}
-      >
-        <span className="text-xl" style={{ color: SAGE }}>
-          ↑
-        </span>
-        <span className="text-[8px] text-white/40 tracking-widest uppercase">
-          Momentum
-        </span>
-      </div>
-    </div>
-  );
-}
 
 // ─── Hero ──────────────────────────────────────────────────────────────────────
 function AriseHero() {
@@ -719,66 +639,9 @@ function Premium() {
   );
 }
 
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-const testimonials = [
-  { text: "I've tried journaling, meditation apps, all of it. ARISE is the only thing I've actually kept up with because it takes ten seconds and it works.", author: "Mariana T.", role: "Designer, Mexico City" },
-  { text: "I wrote my own affirmation on day three. Seeing my own words back at me every morning hit different. Premium was worth it immediately.", author: "Drea K.", role: "Founder, Toronto" },
-  { text: "It shows up exactly when I unlock my phone. I don't have to remember it, open it, or search for motivation. It's just there, waiting.", author: "James R.", role: "Teacher, London" },
-];
-
-function Testimonials() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <section className="relative py-28 px-6">
-      <div className="relative max-w-6xl mx-auto" ref={ref}>
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-xs font-mono tracking-[0.3em] uppercase block mb-4"
-            style={{ color: SAGE }}
-          >
-            What users say
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl md:text-4xl font-bold text-white"
-          >
-            Small practice. Real shift.
-          </motion.h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.author}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.15 + i * 0.1 }}
-              className="rounded-2xl p-7"
-              style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.06)" }}
-            >
-              <div className="text-sm mb-4" style={{ color: "#F59E0B", letterSpacing: "2px" }}>
-                ★★★★★
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
-              <p className="text-white text-sm font-semibold">{t.author}</p>
-              <p className="text-slate-600 text-xs mt-0.5">{t.role}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 const faqs = [
-  { q: "Is ARISE free to use?", a: "Yes. ARISE is free to download and use. The free version includes a daily affirmation, streak tracking, and access to a curated selection of categories. Premium unlocks custom affirmations, all categories, Streak Shield, and future features." },
+  { q: "Is ARISE free to use?", a: "Yes. When ARISE launches, it will be free to download and use. The free version includes a daily affirmation, streak tracking, and access to a curated selection of categories. Premium unlocks custom affirmations, all categories, Streak Shield, and future features." },
   { q: "How does ARISE know when I wake up?", a: "ARISE uses your phone's unlock detection to appear in the morning window (4AM–4PM). On Android, it detects your first phone unlock of the day. On iOS, it activates when the app comes to the foreground after your morning notification tap. There's no GPS, no personal data collected — it simply listens for your phone to wake up." },
   { q: "Can I choose my own affirmations?", a: "Yes — with ARISE Premium. Write unlimited affirmations in your own words, and they'll appear alongside curated ones in your daily rotation." },
   { q: "What happens if I miss a day?", a: "Your streak resets to zero — but you can always start again. Premium users can use a Streak Shield on days when life gets in the way. The streak is there to encourage you, not make you feel bad." },
@@ -902,7 +765,7 @@ function DownloadCTA() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-slate-400 mb-10"
         >
-          Free to download. No account required. Ten seconds. Every morning.
+          Free to download when we launch. No account required. Ten seconds. Every morning.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -945,8 +808,6 @@ export default function ArisePage() {
         <Features />
         <div className="section-divider" />
         <Premium />
-        <div className="section-divider" />
-        <Testimonials />
         <div className="section-divider" />
         <FAQ />
         <DownloadCTA />

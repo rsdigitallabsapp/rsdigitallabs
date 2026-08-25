@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { InquiryForm } from "@/components/sections/InquiryForm";
 
 const links = {
   Work: [
@@ -13,8 +14,8 @@ const links = {
   Studio: [
     { label: "Services", href: "#services" },
     { label: "About", href: "#about" },
-    { label: "Roadmap", href: "#timeline" },
-    { label: "Start a Project", href: "mailto:support@rsdigitallabs.com" },
+    { label: "Process", href: "#process" },
+    { label: "Start a Project", href: "#footer" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
@@ -55,30 +56,32 @@ export function FooterSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="text-center mb-20"
+          className="mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Have a product worth{" "}
-            <span className="gradient-text">building?</span>
-          </h2>
-          <p className="text-slate-400 mb-8 max-w-md mx-auto">
-            Tell us what you're trying to ship — a website, an app, a full
-            product. We'll tell you honestly whether we're the right team
-            for it.
-          </p>
-          <a
-            href="mailto:support@rsdigitallabs.com"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 cursor-pointer"
-            style={{
-              background: "linear-gradient(135deg, #7C3AED, #A855F7)",
-              boxShadow: "0 0 40px rgba(168,85,247,0.4)",
-            }}
-          >
-            Start a Project
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </a>
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Have a product worth{" "}
+              <span className="gradient-text">building?</span>
+            </h2>
+            <p className="text-slate-300 max-w-md mx-auto">
+              Tell us what you're trying to ship — a website, an app, a full
+              product. We'll tell you honestly whether we're the right team
+              for it.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <InquiryForm />
+            <p className="text-center text-sm text-slate-400 mt-5">
+              Prefer email? Reach us directly at{" "}
+              <a
+                href="mailto:support@rsdigitallabs.com"
+                className="text-slate-200 hover:text-violet-300 transition-colors duration-200"
+              >
+                support@rsdigitallabs.com
+              </a>
+            </p>
+          </div>
         </motion.div>
 
         {/* Links grid */}
@@ -87,24 +90,23 @@ export function FooterSection() {
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
               <Image
-                src="/logo-transparent.png"
+                src="/logo-lockup.png"
                 alt="RS Digital Labs"
-                width={150}
-                height={60}
-                className="opacity-90 hover:opacity-100 transition-opacity duration-200"
-                style={{ objectFit: "contain" }}
+                width={171}
+                height={100}
+                className="w-[150px] h-auto opacity-90 hover:opacity-100 transition-opacity duration-200"
               />
             </div>
-            <p className="text-slate-600 text-sm leading-relaxed mb-6">
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
               A product design and development studio. We design, build, and
-              ship — for ourselves and for our clients.
+              ship — for local and small businesses, and for ourselves.
             </p>
           </div>
 
           {/* Link columns */}
           {Object.entries(links).map(([category, items]) => (
             <div key={category}>
-              <h4 className="text-xs font-mono tracking-[0.2em] text-slate-600 uppercase mb-4">
+              <h4 className="text-xs font-mono tracking-[0.2em] text-slate-400 uppercase mb-4">
                 {category}
               </h4>
               <ul className="space-y-3">
@@ -114,7 +116,7 @@ export function FooterSection() {
                       href={resolveHref(item.href)}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="text-slate-500 hover:text-slate-200 text-sm transition-colors duration-200 cursor-pointer"
+                      className="text-slate-300 hover:text-slate-100 text-sm transition-colors duration-200 cursor-pointer"
                     >
                       {item.label}
                     </a>
@@ -127,12 +129,12 @@ export function FooterSection() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-700 text-sm font-mono">
+          <p className="text-slate-400 text-sm font-mono">
             © {new Date().getFullYear()} RS Digital Labs. All rights reserved.
           </p>
           <a
             href="mailto:support@rsdigitallabs.com"
-            className="text-slate-700 text-xs font-mono hover:text-slate-400 transition-colors duration-200"
+            className="text-slate-400 text-xs font-mono hover:text-slate-200 transition-colors duration-200"
           >
             support@rsdigitallabs.com
           </a>

@@ -93,7 +93,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-6 text-slate-400 text-lg max-w-2xl leading-relaxed"
+            className="mt-6 text-slate-300 text-lg max-w-2xl leading-relaxed"
           >
             RS Digital Labs is a focused product studio. We identify problems
             worth solving, design and build products that address them
@@ -118,7 +118,7 @@ export function AboutSection() {
                 <CountUp target={s.value} suffix={s.suffix} />
               </div>
               <div className="text-violet-400 font-semibold mb-2 text-sm tracking-wide">{s.label}</div>
-              <div className="text-slate-500 text-sm">{s.desc}</div>
+              <div className="text-slate-300 text-sm">{s.desc}</div>
             </motion.div>
           ))}
         </div>
@@ -142,7 +142,7 @@ export function AboutSection() {
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors duration-300">
                   {p.title}
                 </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{p.body}</p>
+                <p className="text-slate-300 text-sm leading-relaxed">{p.body}</p>
               </div>
             </motion.div>
           ))}

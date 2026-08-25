@@ -5,6 +5,7 @@ export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
     const onMove = (e: MouseEvent) => {
       if (!ref.current) return;
       ref.current.style.left = e.clientX + "px";

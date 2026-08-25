@@ -83,11 +83,12 @@ export function ServicesSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-6 text-slate-400 text-lg leading-relaxed"
+            className="mt-6 text-slate-300 text-lg leading-relaxed"
           >
-            We work like a product studio, not a vendor — the same process
-            that shipped ARISE, CHIQ, Plannie, and OLIVIA is the one we bring
-            to your project.
+            We work like a product studio, not a vendor — for local and
+            small businesses who need a website, an app, or a full digital
+            product done right, the same process we use on our own apps is
+            the one we bring to your project.
           </motion.p>
         </div>
 
@@ -111,7 +112,7 @@ export function ServicesSection() {
               <h3 className="text-xl font-bold text-white mb-4">{s.title}</h3>
               <ul className="space-y-2.5">
                 {s.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2.5 text-sm text-slate-400">
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-slate-300">
                     <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: s.color }} />
                     {item}
                   </li>

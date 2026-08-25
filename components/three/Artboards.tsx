@@ -68,7 +68,7 @@ function SketchFrame({ radius, baseAngle, speed, baseY, size, color, offset }: S
     const geo = new THREE.BufferGeometry().setFromPoints(
       new Array(17).fill(0).map(() => new THREE.Vector3())
     );
-    const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.3 });
+    const mat = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.15 });
     const line = new THREE.Line(geo, mat);
     line.frustumCulled = false;
     return line;
@@ -111,7 +111,7 @@ function SketchFrame({ radius, baseAngle, speed, baseY, size, color, offset }: S
           <meshBasicMaterial color="#08081a" transparent opacity={0.5} side={THREE.DoubleSide} />
         </mesh>
         <lineSegments geometry={edges}>
-          <lineBasicMaterial color={color} transparent opacity={0.55} />
+          <lineBasicMaterial color={color} transparent opacity={0.4} />
         </lineSegments>
         <mesh position={[0, size[1] / 2 - 0.1, 0.01]}>
           <planeGeometry args={[size[0] - 0.22, 0.05]} />
