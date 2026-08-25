@@ -3,10 +3,9 @@ import { useEffect, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
-import { CrystalCore } from "./CrystalCore";
 import { ParticleField } from "./ParticleField";
-import { EnergyRings } from "./EnergyRings";
-import { FloatingOrbs } from "./FloatingOrbs";
+import { Artboards } from "./Artboards";
+import { BlueprintGrid } from "./BlueprintGrid";
 
 function CameraController({
   mouseRef,
@@ -28,18 +27,16 @@ function CameraController({
 function Scene({ mouseRef }: { mouseRef: React.RefObject<{ x: number; y: number }> }) {
   return (
     <>
-      <fog attach="fog" args={["#020208", 15, 40]} />
-      <ambientLight intensity={0.05} />
+      <fog attach="fog" args={["#020208", 14, 38]} />
       <CameraController mouseRef={mouseRef} />
-      <CrystalCore />
-      <ParticleField count={3000} />
-      <EnergyRings />
-      <FloatingOrbs />
+      <BlueprintGrid />
+      <ParticleField count={900} />
+      <Artboards />
       <EffectComposer>
         <Bloom
-          intensity={1.8}
-          luminanceThreshold={0.05}
-          luminanceSmoothing={0.8}
+          intensity={1.3}
+          luminanceThreshold={0.12}
+          luminanceSmoothing={0.7}
           mipmapBlur
         />
       </EffectComposer>
