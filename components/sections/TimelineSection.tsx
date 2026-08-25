@@ -142,14 +142,11 @@ export function TimelineSection() {
                         >
                           {m.icon}
                         </div>
-                        <div>
-                          <div
-                            className="text-xs font-mono tracking-widest"
-                            style={{ color: m.color }}
-                          >
-                            {m.year} · {m.quarter}
-                          </div>
-                          <div className="text-[10px] text-slate-600 uppercase tracking-wider">{m.label}</div>
+                        <div
+                          className="text-xs font-mono tracking-widest uppercase"
+                          style={{ color: m.color }}
+                        >
+                          {m.label}
                         </div>
                         {m.future && (
                           <div
