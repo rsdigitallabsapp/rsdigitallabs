@@ -27,6 +27,10 @@ export function CursorImageTrail({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
+      // Touch devices don't have a real cursor to trail — skip entirely so
+      // mobile relies on the tap/press state on each card instead.
+      if (!window.matchMedia("(pointer: fine)").matches) return;
+
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
       const x = e.clientX - rect.left;

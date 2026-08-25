@@ -50,11 +50,11 @@ function ConceptCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      className="glass rounded-2xl p-8 flex flex-col items-center text-center"
+      className="flex flex-col items-center text-center"
     >
       <div className="mb-6 flex items-center justify-center">{node}</div>
       <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{title}</h3>
-      <p className="text-slate-300 text-sm leading-relaxed">{blurb}</p>
+      <p className="text-slate-300 text-sm leading-relaxed max-w-xs">{blurb}</p>
     </motion.div>
   );
 }
@@ -115,7 +115,7 @@ export function SelectedWorkSection() {
             <ConceptCard key={c.id} title={c.title} blurb={c.blurb} node={c.node} index={i} />
           ))}
           {featuredApps.map((app, i) => (
-            <AppCard key={app.id} app={app} index={i + concepts.length} />
+            <AppCard key={app.id} app={app} index={i + concepts.length} variant="bare" />
           ))}
         </div>
 

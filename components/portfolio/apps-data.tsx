@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { ArisePhoneMockup } from "@/components/portfolio/ArisePhoneMockup";
 import { PlanniePhoneMockup } from "@/components/portfolio/PlanniePhoneMockup";
@@ -125,11 +125,20 @@ export const apps = [
 
 export type AppEntry = (typeof apps)[0];
 
-export function AppCard({ app, index }: { app: AppEntry; index: number }) {
+export function AppCard({
+  app,
+  index,
+  variant = "card",
+}: {
+  app: AppEntry;
+  index: number;
+  variant?: "card" | "bare";
+}) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
+  const cardRef = useRef<HTMLAnchorElement | HTMLDivElement>(null);
+  const isBare = variant === "bare";
+  const isExternal = app.href?.startsWith("http");
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
@@ -139,131 +148,208 @@ export function AppCard({ app, index }: { app: AppEntry; index: number }) {
     setTilt({ x: y * -18, y: x * 18 });
   };
 
+  const resetHover = () => {
+    setHovered(false);
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const interactionProps = {
+    onMouseMove: handleMouseMove,
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: resetHover,
+  };
+
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020208]";
+
+  const previewBox = app.preview && (
+    <div
+      className="relative h-56 rounded-xl overflow-hidden flex items-start justify-center transition-shadow duration-300"
+      style={{
+        background: "rgba(0,0,0,0.25)",
+        boxShadow: isBare && hovered ? `0 0 40px ${app.glowColor}, 0 12px 40px rgba(0,0,0,0.45)` : "none",
+      }}
+    >
+      {app.preview}
+      <div
+        className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, transparent, rgba(2,2,8,0.5))" }}
+      />
+      {isBare && (
+        <div
+          className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest"
+          style={{ background: "rgba(2,2,8,0.8)", border: "1px solid rgba(255,255,255,0.2)", color: app.color }}
+        >
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse-glow" style={{ background: app.color }} />
+          {app.status}
+        </div>
+      )}
+    </div>
+  );
+
+  const content = isBare ? (
+    <div className="relative z-10 flex flex-col items-center text-center max-w-sm mx-auto">
+      {app.preview && <div className="mb-2 w-full">{previewBox}</div>}
+      <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mb-6">
+        Product interface preview
+      </p>
+
+      <h3
+        className="text-2xl font-bold mb-2 tracking-tight transition-all duration-300"
+        style={{ color: hovered ? app.color : "#F1F5F9" }}
+      >
+        {app.name}
+      </h3>
+      <p className="text-sm font-medium text-slate-300 mb-3 tracking-wide">{app.tagline}</p>
+      <p className="text-slate-300 text-sm leading-relaxed">{app.description}</p>
+
+      {app.href && (
+        <div
+          className="mt-6 flex items-center gap-2 text-sm font-semibold transition-all duration-300"
+          style={{ color: hovered ? app.color : "rgba(255,255,255,0.5)" }}
+        >
+          Learn more
+          <svg className={`w-4 h-4 transition-transform duration-300 ${hovered ? "translate-x-1" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
+      )}
+    </div>
+  ) : (
+    <div className="relative z-10 p-8">
+      {/* Status badge */}
+      <div className="flex items-center justify-between mb-6">
+        <div
+          className="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-wider"
+          style={{
+            background: app.accentBg,
+            color: app.color,
+            border: `1px solid ${app.color}30`,
+          }}
+        >
+          <div
+            className="w-1.5 h-1.5 rounded-full animate-pulse-glow"
+            style={{ background: app.color }}
+          />
+          {app.status}
+        </div>
+        <div style={{ color: app.color }} className="opacity-60 group-hover:opacity-100 transition-opacity">
+          {app.icon}
+        </div>
+      </div>
+
+      {/* Product interface preview */}
+      {app.preview && (
+        <div className="mb-6">
+          {previewBox}
+          <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mt-2 text-center">
+            Product interface preview
+          </p>
+        </div>
+      )}
+
+      {/* Name */}
+      <h3
+        className="text-3xl font-bold mb-3 tracking-tight transition-all duration-300"
+        style={{ color: hovered ? app.color : "#F1F5F9" }}
+      >
+        {app.name}
+      </h3>
+
+      {/* Tagline */}
+      <p className="text-sm font-medium text-slate-300 mb-4 tracking-wide">
+        {app.tagline}
+      </p>
+
+      {/* Description */}
+      <p className="text-slate-300 text-sm leading-relaxed">
+        {app.description}
+      </p>
+
+      {/* CTA */}
+      {app.href ? (
+        <div
+          className="mt-8 flex items-center gap-2 text-sm font-semibold transition-all duration-300"
+          style={{ color: hovered ? app.color : "rgba(255,255,255,0.3)" }}
+        >
+          Learn more
+          <svg className={`w-4 h-4 transition-transform duration-300 ${hovered ? "translate-x-1" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </div>
+      ) : (
+        <div className="mt-8 text-sm font-medium text-white/20">
+          Page coming soon
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => {
-        setHovered(false);
-        setTilt({ x: 0, y: 0 });
-      }}
-      onClick={() => {
-        if (!app.href) return;
-        if (app.href.startsWith("http")) {
-          window.open(app.href, "_blank", "noopener,noreferrer");
-        } else {
-          router.push(app.href);
-        }
-      }}
-      style={{
-        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${hovered ? "10px" : "0px"})`,
-        transition: hovered ? "transform 0.1s linear, box-shadow 0.3s" : "transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s",
-        boxShadow: hovered
-          ? `0 0 60px ${app.glowColor}, 0 0 120px ${app.glowColor.replace("0.3", "0.1")}, 0 20px 60px rgba(0,0,0,0.5)`
-          : "0 4px 40px rgba(0,0,0,0.3)",
-      }}
-      className={`relative rounded-2xl overflow-hidden group ${app.href ? "cursor-pointer" : "cursor-default"}`}
     >
-      {/* Card background */}
-      <div
-        className="absolute inset-0 transition-opacity duration-500"
-        style={{
-          background: `linear-gradient(135deg, ${app.accentBg}, transparent)`,
-          opacity: hovered ? 1 : 0.5,
-        }}
-      />
-      <div className="glass absolute inset-0" />
-
-      {/* Glow border on hover */}
-      <div
-        className="absolute inset-0 rounded-2xl transition-opacity duration-400 pointer-events-none"
-        style={{
-          boxShadow: `inset 0 0 0 1px ${hovered ? app.color + "60" : "rgba(255,255,255,0.08)"}`,
-          opacity: 1,
-        }}
-      />
-
-      <div className="relative z-10 p-8">
-        {/* Status badge */}
-        <div className="flex items-center justify-between mb-8">
-          <div
-            className="flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-wider"
-            style={{
-              background: app.accentBg,
-              color: app.color,
-              border: `1px solid ${app.color}30`,
-            }}
-          >
-            <div
-              className="w-1.5 h-1.5 rounded-full animate-pulse-glow"
-              style={{ background: app.color }}
-            />
-            {app.status}
-          </div>
-          <div style={{ color: app.color }} className="opacity-60 group-hover:opacity-100 transition-opacity">
-            {app.icon}
-          </div>
-        </div>
-
-        {/* Product interface preview */}
-        {app.preview && (
-          <div className="mb-6">
-            <div
-              className="relative h-56 rounded-xl overflow-hidden flex items-start justify-center"
-              style={{ background: "rgba(0,0,0,0.25)" }}
-            >
-              {app.preview}
-              <div
-                className="absolute inset-x-0 bottom-0 h-10 pointer-events-none"
-                style={{ background: "linear-gradient(to bottom, transparent, rgba(2,2,8,0.5))" }}
-              />
-            </div>
-            <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mt-2 text-center">
-              Product interface preview
-            </p>
-          </div>
-        )}
-
-        {/* Name */}
-        <h3
-          className="text-3xl font-bold mb-3 tracking-tight transition-all duration-300"
-          style={{ color: hovered ? app.color : "#F1F5F9" }}
+      {app.href ? (
+        <Link
+          ref={cardRef as React.Ref<HTMLAnchorElement>}
+          href={app.href}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          {...interactionProps}
+          style={{
+            transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${hovered ? "10px" : "0px"})`,
+            transition: hovered ? "transform 0.1s linear, box-shadow 0.3s" : "transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s",
+            // Only set an inline box-shadow for the "card" chrome — leave it
+            // unset (rather than "none") for bare cards so it never
+            // clobbers the focus-visible ring, which is CSS-class-driven
+            // and would otherwise lose to any inline style.
+            ...(!isBare && {
+              boxShadow: hovered
+                ? `0 0 60px ${app.glowColor}, 0 0 120px ${app.glowColor.replace("0.3", "0.1")}, 0 20px 60px rgba(0,0,0,0.5)`
+                : "0 4px 40px rgba(0,0,0,0.3)",
+            }),
+          }}
+          className={`block relative group cursor-pointer active:scale-[0.98] transition-transform ${isBare ? "rounded-xl" : "rounded-2xl overflow-hidden"} ${focusRing}`}
         >
-          {app.name}
-        </h3>
-
-        {/* Tagline */}
-        <p className="text-sm font-medium text-slate-300 mb-4 tracking-wide">
-          {app.tagline}
-        </p>
-
-        {/* Description */}
-        <p className="text-slate-300 text-sm leading-relaxed">
-          {app.description}
-        </p>
-
-        {/* CTA */}
-        {app.href ? (
-          <div
-            className="mt-8 flex items-center gap-2 text-sm font-semibold transition-all duration-300"
-            style={{ color: hovered ? app.color : "rgba(255,255,255,0.3)" }}
-          >
-            Learn more
-            <svg className={`w-4 h-4 transition-transform duration-300 ${hovered ? "translate-x-1" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </div>
-        ) : (
-          <div className="mt-8 text-sm font-medium text-white/20">
-            Page coming soon
-          </div>
-        )}
-      </div>
+          {!isBare && (
+            <>
+              <div
+                className="absolute inset-0 transition-opacity duration-500"
+                style={{
+                  background: `linear-gradient(135deg, ${app.accentBg}, transparent)`,
+                  opacity: hovered ? 1 : 0.5,
+                }}
+              />
+              <div className="glass absolute inset-0" />
+              <div
+                className="absolute inset-0 rounded-2xl transition-opacity duration-400 pointer-events-none"
+                style={{ boxShadow: `inset 0 0 0 1px ${hovered ? app.color + "60" : "rgba(255,255,255,0.08)"}` }}
+              />
+            </>
+          )}
+          {content}
+        </Link>
+      ) : (
+        <div ref={cardRef as React.Ref<HTMLDivElement>} className="relative rounded-2xl overflow-hidden cursor-default">
+          {!isBare && (
+            <>
+              <div
+                className="absolute inset-0"
+                style={{ background: `linear-gradient(135deg, ${app.accentBg}, transparent)`, opacity: 0.5 }}
+              />
+              <div className="glass absolute inset-0" />
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                style={{ boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.08)" }}
+              />
+            </>
+          )}
+          {content}
+        </div>
+      )}
     </motion.div>
   );
 }
