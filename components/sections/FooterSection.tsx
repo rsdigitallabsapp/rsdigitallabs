@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const links = {
   Work: [
@@ -29,6 +30,11 @@ const links = {
 };
 
 export function FooterSection() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const resolveHref = (href: string) =>
+    href.startsWith("#") && !isHome ? `/${href}` : href;
+
   return (
     <footer id="footer" className="relative pt-24 pb-12 px-6 overflow-hidden">
       {/* Divider */}
@@ -105,7 +111,7 @@ export function FooterSection() {
                 {items.map((item) => (
                   <li key={item.label}>
                     <a
-                      href={item.href}
+                      href={resolveHref(item.href)}
                       className="text-slate-500 hover:text-slate-200 text-sm transition-colors duration-200 cursor-pointer"
                     >
                       {item.label}

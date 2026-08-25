@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -13,6 +14,9 @@ const navLinks = [
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const toHome = (hash: string) => (isHome ? hash : `/${hash}`);
 
   useEffect(() => {
     const unsub = scrollY.on("change", (v) => setScrolled(v > 60));
@@ -35,7 +39,7 @@ export function Navigation() {
       >
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <a href="#hero" className="flex items-center cursor-pointer group">
+          <a href={toHome("#hero")} className="flex items-center cursor-pointer group">
             <Image
               src="/logo-transparent.png"
               alt="RS Digital Labs"
@@ -52,7 +56,7 @@ export function Navigation() {
             {navLinks.map((link) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={toHome(link.href)}
                 className="px-4 py-2 text-sm text-slate-400 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200 cursor-pointer"
               >
                 {link.label}
