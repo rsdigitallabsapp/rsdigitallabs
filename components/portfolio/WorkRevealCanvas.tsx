@@ -6,7 +6,7 @@ import { workItems } from "@/components/portfolio/work-items";
 
 const DWELL_MS = 320;
 const LEAVE_DELAY_MS = 150;
-const TRAIL_SPAWN_DISTANCE = 90;
+const TRAIL_SPAWN_DISTANCE = 140;
 const TRAIL_LIFETIME_MS = 750;
 
 type TrailItem = { id: number; src: string; x: number; y: number; rotate: number };
@@ -205,8 +205,8 @@ export function WorkRevealCanvas() {
                 style={{
                   left: it.x,
                   top: it.y,
-                  width: 132,
-                  height: 96,
+                  width: 260,
+                  height: 190,
                   transform: `translate(-50%, -50%) rotate(${it.rotate}deg)`,
                   boxShadow: "0 20px 50px rgba(0,0,0,0.55)",
                   border: "1px solid rgba(255,255,255,0.12)",
