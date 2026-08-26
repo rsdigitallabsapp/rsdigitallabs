@@ -8,6 +8,7 @@ const steps = [
     label: "Understand the problem",
     description: "We start by listening — your business, your customers, what's working, and what isn't. No proposal gets written before we understand the problem.",
     color: "#A855F7",
+    textColor: "#7C3AED",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.5" />
@@ -20,6 +21,7 @@ const steps = [
     label: "Scope the right build",
     description: "We turn what we learned into a concrete plan — what gets built, what it costs, and when it ships. No guessing, no scope creep later.",
     color: "#22D3EE",
+    textColor: "#0E7490",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -32,6 +34,7 @@ const steps = [
     label: "Make it look right",
     description: "Real screens, not mood boards. We design the actual product so you can see and react to it before a single line of code ships.",
     color: "#60A5FA",
+    textColor: "#2563EB",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <path d="M15 4l5 5-11 11H4v-5L15 4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -43,6 +46,7 @@ const steps = [
     label: "Make it work",
     description: "We write the code — clean, tested, and built to last past launch day, not just to demo well once.",
     color: "#818CF8",
+    textColor: "#4F46E5",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <path d="M8 9l-4 4 4 4M16 9l4 4-4 4M13 5l-2 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -54,6 +58,7 @@ const steps = [
     label: "Ship it for real",
     description: "We handle the unglamorous parts — deployment, app-store submission, and the last-mile details most agencies leave for you to figure out.",
     color: "#A855F7",
+    textColor: "#7C3AED",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7l3-7z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -65,6 +70,7 @@ const steps = [
     label: "Keep it working",
     description: "Launch is the start, not the finish. We stick around to iterate on real usage, real feedback, and real numbers.",
     color: "#22D3EE",
+    textColor: "#0E7490",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
         <path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -79,12 +85,12 @@ export function TimelineSection() {
   const isInView = useInView(headingRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="process" className="relative py-32 px-6 overflow-hidden">
+    <section id="process" className="relative py-32 px-6 overflow-hidden" style={{ background: "var(--paper)" }}>
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(129,140,248,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(129,140,248,0.06) 0%, transparent 70%)",
         }}
       />
 
@@ -97,20 +103,21 @@ export function TimelineSection() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-indigo-500" />
-            <span className="text-xs font-mono tracking-[0.3em] text-indigo-400 uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-indigo-600" />
+            <span className="text-xs font-mono tracking-[0.3em] text-indigo-600 uppercase">
               How We Work
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-indigo-500" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-indigo-600" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold text-white leading-tight"
+            className="text-4xl md:text-6xl font-bold leading-tight"
+            style={{ color: "var(--ink)" }}
           >
             From first sketch{" "}
-            <span className="gradient-text">to launch day.</span>
+            <span className="gradient-text-light">to launch day.</span>
           </motion.h2>
         </div>
 
@@ -139,34 +146,34 @@ export function TimelineSection() {
                   {/* Content card */}
                   <div className={`flex-1 pl-16 md:pl-0 ${isRight ? "md:pl-12" : "md:pr-12"}`}>
                     <div
-                      className="glass rounded-2xl p-7 transition-all duration-500 hover:border-opacity-60 group"
+                      className="glass-light rounded-2xl p-7 transition-all duration-500 hover:border-opacity-60 group"
                       style={{
-                        borderColor: m.color + "20",
+                        borderColor: m.textColor + "30",
                       }}
                     >
                       {/* Top row */}
                       <div className="flex items-center gap-3 mb-4">
                         <div
                           className="flex items-center justify-center w-8 h-8 rounded-lg"
-                          style={{ background: m.color + "20", color: m.color }}
+                          style={{ background: "rgba(20,19,43,0.06)", color: m.color }}
                         >
                           {m.icon}
                         </div>
                         <div
                           className="text-xs font-mono tracking-widest uppercase"
-                          style={{ color: m.color }}
+                          style={{ color: m.textColor }}
                         >
                           {m.label}
                         </div>
                       </div>
 
                       <h3
-                        className="text-2xl font-bold mb-2 transition-colors duration-300 group-hover:text-white"
-                        style={{ color: "#F1F5F9" }}
+                        className="text-2xl font-bold mb-2 transition-colors duration-300"
+                        style={{ color: "var(--ink)" }}
                       >
                         {m.name}
                       </h3>
-                      <p className="text-slate-300 text-sm leading-relaxed">{m.description}</p>
+                      <p className="text-slate-600 text-sm leading-relaxed">{m.description}</p>
                     </div>
                   </div>
 

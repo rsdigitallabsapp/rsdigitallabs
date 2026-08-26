@@ -6,6 +6,7 @@ import { SelectedWorkSection } from "@/components/sections/SelectedWorkSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { TimelineSection } from "@/components/sections/TimelineSection";
 import { FooterSection } from "@/components/sections/FooterSection";
+import { SectionSeam } from "@/components/SectionSeam";
 
 export default function Home() {
   return (
@@ -15,12 +16,13 @@ export default function Home() {
       <Navigation />
       <main>
         <HeroSection />
-        <div className="section-divider" />
+        <SectionSeam direction="into-light" />
         <SelectedWorkSection />
         <div className="section-divider" />
         <TimelineSection />
         <div className="section-divider" />
         <AboutSection />
+        <SectionSeam direction="into-dark" />
         <FooterSection formVariant="general" />
       </main>
     </>

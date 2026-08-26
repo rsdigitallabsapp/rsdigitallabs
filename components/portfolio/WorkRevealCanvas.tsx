@@ -150,10 +150,10 @@ export function WorkRevealCanvas() {
   return (
     <div>
       <div className="text-center mb-10">
-        <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-2">
+        <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-2" style={{ color: "var(--ink)" }}>
           Move through the work.
         </h3>
-        <p className="text-slate-400 text-sm">
+        <p className="text-slate-500 text-sm">
           Move your cursor to uncover what we&rsquo;ve built.
         </p>
       </div>

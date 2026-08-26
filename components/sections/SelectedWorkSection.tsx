@@ -106,12 +106,12 @@ export function SelectedWorkSection() {
         : "mobile";
 
   return (
-    <section id="work" className="relative py-32 px-6">
+    <section id="work" className="relative py-32 px-6" style={{ background: "var(--paper)" }}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,58,237,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,58,237,0.07) 0%, transparent 70%)",
         }}
       />
 
@@ -124,26 +124,27 @@ export function SelectedWorkSection() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500" />
-            <span className="text-xs font-mono tracking-[0.3em] text-cyan-400 uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-700" />
+            <span className="text-xs font-mono tracking-[0.3em] text-cyan-700 uppercase">
               Selected Work
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-700" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold text-white leading-tight"
+            className="text-4xl md:text-6xl font-bold leading-tight"
+            style={{ color: "var(--ink)" }}
           >
             Websites and apps,{" "}
-            <span className="gradient-text">built the same way.</span>
+            <span className="gradient-text-light">built the same way.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-5 text-slate-300 text-lg max-w-xl mx-auto"
+            className="mt-5 text-slate-600 text-lg max-w-xl mx-auto"
           >
             Everything below was genuinely designed and built by RS Digital
             Labs — real product work and real concept design, no
@@ -159,7 +160,8 @@ export function SelectedWorkSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/website"
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-slate-200 glass cursor-pointer transition-all duration-300 hover:border-violet-500/40 hover:text-white"
+            className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm glass-light cursor-pointer transition-all duration-300 hover:border-violet-500/50"
+            style={{ color: "var(--ink)" }}
           >
             View all website work
             <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,7 +170,8 @@ export function SelectedWorkSection() {
           </Link>
           <Link
             href="/app"
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-slate-200 glass cursor-pointer transition-all duration-300 hover:border-violet-500/40 hover:text-white"
+            className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm glass-light cursor-pointer transition-all duration-300 hover:border-violet-500/50"
+            style={{ color: "var(--ink)" }}
           >
             View all app work
             <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
