@@ -13,6 +13,9 @@ export type WorkItem = {
   isExternal?: boolean;
   color: string;
   preview: React.ReactNode;
+  // A real screenshot used only for the desktop cursor-trail effect — a
+  // lightweight thumbnail, not the live preview component.
+  trailImage: string;
 };
 
 // Single source of truth for the "Selected Work" showcase — the static grid,
@@ -27,6 +30,7 @@ export const workItems: WorkItem[] = [
     description: "A warm, appetite-first homepage built to drive reservations.",
     href: "/website",
     color: "#C4714E",
+    trailImage: "/trail/restaurant.png",
     preview: (
       <div inert aria-hidden="true" className="w-full h-full flex items-center justify-center">
         <RestaurantConcept />
@@ -41,6 +45,7 @@ export const workItems: WorkItem[] = [
     description: "A calm, trustworthy layout built to drive appointment requests.",
     href: "/website",
     color: "#22D3EE",
+    trailImage: "/trail/medical.png",
     preview: (
       <div inert aria-hidden="true" className="w-full h-full flex items-center justify-center">
         <MedicalConcept />
@@ -56,6 +61,7 @@ export const workItems: WorkItem[] = [
       "Your morning affirmation ritual. One statement, spoken aloud, three times, in under ten seconds.",
     href: "/arise",
     color: "#8AAF8E",
+    trailImage: "/trail/arise.png",
     preview: (
       <div inert aria-hidden="true" className="w-full h-full flex items-center justify-center">
         <div className="scale-[0.46] origin-top">
@@ -74,6 +80,7 @@ export const workItems: WorkItem[] = [
     href: "https://chiqdating.com",
     isExternal: true,
     color: "#A855F7",
+    trailImage: "/trail/chiq.png",
     preview: (
       <div inert aria-hidden="true" className="relative w-full h-full">
         <Image

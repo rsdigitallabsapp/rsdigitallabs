@@ -38,6 +38,44 @@ function getHydratedServerSnapshot() {
   return false;
 }
 
+// The blank reveal canvas only makes sense for someone actively driving a
+// mouse — it can't be scanned visually the way a hover-to-preview grid can,
+// so a sighted keyboard-only visitor should never be dropped into it. Tab
+// is the standard signal used elsewhere (e.g. the WICG focus-visible
+// heuristic) for "this visitor is navigating by keyboard." Detection is
+// global (any Tab press anywhere on the page, not just inside this section)
+// and one-way for the rest of the session — once someone is known to be
+// tabbing, we don't want the accessible grid to vanish out from under them
+// just because the mouse moved afterward.
+let keyboardModalityDetected = false;
+let keyboardListenerAttached = false;
+const keyboardModalityListeners = new Set<() => void>();
+
+function ensureKeyboardListener() {
+  if (keyboardListenerAttached || typeof window === "undefined") return;
+  keyboardListenerAttached = true;
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Tab" && !keyboardModalityDetected) {
+      keyboardModalityDetected = true;
+      keyboardModalityListeners.forEach((listener) => listener());
+    }
+  });
+}
+
+function subscribeToKeyboardModality(callback: () => void) {
+  ensureKeyboardListener();
+  keyboardModalityListeners.add(callback);
+  return () => keyboardModalityListeners.delete(callback);
+}
+
+function getKeyboardModality() {
+  return keyboardModalityDetected;
+}
+
+function getKeyboardModalityServerSnapshot() {
+  return false;
+}
+
 export function SelectedWorkSection() {
   const headingRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(headingRef, { once: true, margin: "-100px" });
@@ -52,11 +90,16 @@ export function SelectedWorkSection() {
     getPointerSnapshot,
     getPointerServerSnapshot
   );
+  const usingKeyboard = useSyncExternalStore(
+    subscribeToKeyboardModality,
+    getKeyboardModality,
+    getKeyboardModalityServerSnapshot
+  );
   const hydrated = useSyncExternalStore(subscribeNever, getHydratedSnapshot, getHydratedServerSnapshot);
 
   const mode: Mode = !hydrated
     ? "static"
-    : prefersReducedMotion
+    : prefersReducedMotion || usingKeyboard
       ? "static"
       : isDesktopPointer
         ? "canvas"
@@ -118,7 +161,7 @@ export function SelectedWorkSection() {
             href="/website"
             className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-slate-200 glass cursor-pointer transition-all duration-300 hover:border-violet-500/40 hover:text-white"
           >
-            See all website work
+            View all website work
             <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
@@ -127,7 +170,7 @@ export function SelectedWorkSection() {
             href="/app"
             className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-slate-200 glass cursor-pointer transition-all duration-300 hover:border-violet-500/40 hover:text-white"
           >
-            See all app work
+            View all app work
             <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
