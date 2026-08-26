@@ -54,8 +54,8 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-3 mb-6"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-violet-600" />
-            <span className="text-xs font-mono tracking-[0.3em] text-violet-600 uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-violet-500" />
+            <span className="text-xs font-mono tracking-[0.3em] text-violet-400 uppercase">
               About the Lab
             </span>
           </motion.div>
@@ -73,7 +73,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-6 text-slate-600 text-lg max-w-2xl leading-relaxed"
+            className="mt-6 text-slate-300 text-lg max-w-2xl leading-relaxed"
           >
             RS Digital Labs is a focused product studio. We identify problems
             worth solving, design and build products that address them
@@ -95,7 +95,7 @@ export function AboutSection() {
               className="glass-light rounded-2xl p-8"
             >
               <div className="text-xl font-bold mb-2" style={{ color: "var(--ink)" }}>{c.title}</div>
-              <div className="text-slate-600 text-sm leading-relaxed">{c.desc}</div>
+              <div className="text-slate-300 text-sm leading-relaxed">{c.desc}</div>
             </motion.div>
           ))}
         </div>
@@ -112,17 +112,17 @@ export function AboutSection() {
               className="flex gap-6 group"
             >
               <div className="flex-shrink-0">
-                <span className="text-xs font-mono text-violet-600 tracking-widest">{p.number}</span>
+                <span className="text-xs font-mono text-violet-400 tracking-widest">{p.number}</span>
                 <div className="mt-2 w-px h-12 bg-gradient-to-b from-violet-700/60 to-transparent" />
               </div>
               <div>
                 <h3
-                  className="text-xl font-bold mb-3 group-hover:text-violet-700 transition-colors duration-300"
+                  className="text-xl font-bold mb-3 group-hover:text-violet-300 transition-colors duration-300"
                   style={{ color: "var(--ink)" }}
                 >
                   {p.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{p.body}</p>
+                <p className="text-slate-300 text-sm leading-relaxed">{p.body}</p>
               </div>
             </motion.div>
           ))}

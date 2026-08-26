@@ -34,7 +34,7 @@ export function WorkRevealMobile() {
 
   return (
     <div className="mb-12">
-      <p className="text-center text-slate-500 text-sm mb-6">
+      <p className="text-center text-slate-400 text-sm mb-6">
         Swipe to explore the work.
       </p>
 
@@ -48,7 +48,7 @@ export function WorkRevealMobile() {
             href={item.href}
             target={item.isExternal ? "_blank" : undefined}
             rel={item.isExternal ? "noopener noreferrer" : undefined}
-            className="snap-center shrink-0 w-[85vw] max-w-sm rounded-xl overflow-hidden active:scale-[0.98] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-600 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--paper)]"
+            className="snap-center shrink-0 w-[85vw] max-w-sm rounded-xl overflow-hidden active:scale-[0.98] transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--paper)]"
           >
             <div className="relative h-64 rounded-xl overflow-hidden mb-5" style={{ background: "rgba(0,0,0,0.25)" }}>
               {item.preview}
@@ -61,9 +61,9 @@ export function WorkRevealMobile() {
               </div>
             </div>
             <div className="text-center px-1">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-2">{item.kind}</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mb-2">{item.kind}</p>
               <h3 className="text-xl font-bold mb-2 tracking-tight" style={{ color: "var(--ink)" }}>{item.title}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
+              <p className="text-slate-300 text-sm leading-relaxed">{item.description}</p>
             </div>
           </Link>
         ))}
@@ -84,7 +84,7 @@ export function WorkRevealMobile() {
               style={{
                 width: active === i ? 18 : 6,
                 height: 6,
-                background: active === i ? "#7C3AED" : "rgba(20,19,43,0.18)",
+                background: active === i ? "#A855F7" : "rgba(255,255,255,0.25)",
               }}
             />
           </button>

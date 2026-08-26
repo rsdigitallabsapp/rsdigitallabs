@@ -4,7 +4,7 @@ import Link from "next/link";
 import { workItems, type WorkItem } from "@/components/portfolio/work-items";
 
 const focusRing =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-600 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--paper)]";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--paper)]";
 
 function WorkCard({ item, index }: { item: WorkItem; index: number }) {
   return (
@@ -39,17 +39,17 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
         </div>
 
         <div className="text-center max-w-sm mx-auto">
-          <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-2">
+          <p className="text-[10px] font-mono uppercase tracking-widest text-slate-400 mb-2">
             {item.kind}
           </p>
           <h3
-            className="text-2xl font-bold mb-2 tracking-tight transition-colors duration-300 group-hover:text-violet-700"
+            className="text-2xl font-bold mb-2 tracking-tight transition-colors duration-300 group-hover:text-violet-300"
             style={{ color: "var(--ink)" }}
           >
             {item.title}
           </h3>
-          <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
-          <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition-colors duration-300 group-hover:text-violet-700">
+          <p className="text-slate-300 text-sm leading-relaxed">{item.description}</p>
+          <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-400 transition-colors duration-300 group-hover:text-violet-300">
             Learn more
             <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />

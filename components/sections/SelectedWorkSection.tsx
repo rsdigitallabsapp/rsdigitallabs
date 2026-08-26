@@ -124,11 +124,11 @@ export function SelectedWorkSection() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center gap-3 mb-6"
           >
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-700" />
-            <span className="text-xs font-mono tracking-[0.3em] text-cyan-700 uppercase">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500" />
+            <span className="text-xs font-mono tracking-[0.3em] text-cyan-400 uppercase">
               Selected Work
             </span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-700" />
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
@@ -144,7 +144,7 @@ export function SelectedWorkSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-5 text-slate-600 text-lg max-w-xl mx-auto"
+            className="mt-5 text-slate-300 text-lg max-w-xl mx-auto"
           >
             Everything below was genuinely designed and built by RS Digital
             Labs — real product work and real concept design, no

@@ -153,7 +153,7 @@ export function WorkRevealCanvas() {
         <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-2" style={{ color: "var(--ink)" }}>
           Move through the work.
         </h3>
-        <p className="text-slate-500 text-sm">
+        <p className="text-slate-400 text-sm">
           Move your cursor to uncover what we&rsquo;ve built.
         </p>
       </div>
@@ -208,8 +208,8 @@ export function WorkRevealCanvas() {
                   width: 340,
                   height: 248,
                   transform: `translate(-50%, -50%) rotate(${it.rotate}deg)`,
-                  boxShadow: "0 20px 50px rgba(20,19,43,0.25)",
-                  border: "1px solid rgba(20,19,43,0.1)",
+                  boxShadow: "0 20px 50px rgba(0,0,0,0.45)",
+                  border: "1px solid rgba(255,255,255,0.12)",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
