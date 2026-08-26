@@ -162,8 +162,8 @@ export function WorkRevealCanvas() {
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative overflow-hidden rounded-2xl grid grid-cols-2 mb-12"
-        style={{ background: "#020208" }}
+        className="relative overflow-hidden grid grid-cols-2 mb-12"
+        style={{ background: "var(--paper)" }}
       >
         {workItems.map((item) => (
           <div
@@ -208,8 +208,8 @@ export function WorkRevealCanvas() {
                   width: 340,
                   height: 248,
                   transform: `translate(-50%, -50%) rotate(${it.rotate}deg)`,
-                  boxShadow: "0 20px 50px rgba(0,0,0,0.55)",
-                  border: "1px solid rgba(255,255,255,0.12)",
+                  boxShadow: "0 20px 50px rgba(20,19,43,0.25)",
+                  border: "1px solid rgba(20,19,43,0.1)",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
