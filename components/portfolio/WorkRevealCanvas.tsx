@@ -171,7 +171,7 @@ export function WorkRevealCanvas() {
             ref={(el) => {
               zoneRefs.current[item.id] = el;
             }}
-            className="relative h-96 md:h-[28rem]"
+            className="relative h-[28rem] md:h-[34rem]"
           >
             {/* Real, always-present accessible link. Visually empty (the
                 blank canvas) — the trailing thumbnails and tooltip are

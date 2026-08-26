@@ -153,9 +153,15 @@ export function SelectedWorkSection() {
         </div>
 
         {mode === "static" && <WorkStaticGrid />}
-        {mode === "canvas" && <WorkRevealCanvas />}
         {mode === "mobile" && <WorkRevealMobile />}
+      </div>
 
+      {/* The desktop reveal canvas breaks out of the centered max-w-6xl
+          column deliberately — it needs to feel like the whole section is
+          the interactive surface, not a box floating inside it. */}
+      {mode === "canvas" && <WorkRevealCanvas />}
+
+      <div className="max-w-6xl mx-auto">
         {/* Path links */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
